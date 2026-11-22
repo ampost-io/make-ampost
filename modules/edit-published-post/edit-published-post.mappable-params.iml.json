@@ -1,0 +1,26 @@
+[
+	{
+		"name": "postId",
+		"type": "text",
+		"label": "Post ID",
+		"required": true,
+		"help": "The `id` of an Ampost post, for example from **Create a post** or **Search posts**."
+	},
+	{
+		"name": "text",
+		"type": "text",
+		"label": "New text",
+		"required": true,
+		"multiline": true,
+		"help": "Replaces the published text. Media and links stay. Each platform's text length limit applies."
+	},
+	{
+		"name": "accountIds",
+		"type": "select",
+		"label": "Accounts",
+		"multiple": true,
+		"options": "rpc://listAccountOptions",
+		"mode": "edit",
+		"help": "Leave empty to edit the post on every account where it is published. Instagram, Threads, TikTok, Bluesky and X have no edit API: those accounts keep their text, with a notice saying so."
+	}
+]

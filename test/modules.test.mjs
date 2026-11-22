@@ -78,6 +78,8 @@ function defaultFixtures() {
     posts_publish: () => sample("publishPost"),
     posts_retry: () => sample("retryPost"),
     posts_delete: () => sample("deletePost"),
+    posts_unpublish: () => sample("unpublishPost"),
+    posts_edit_published: () => sample("editPublishedPost"),
     media_upload_create: () => uploadCreated,
     media_upload_status: () => uploadStatus("completed"),
     accounts_list: () => page([sample("listAccounts")]),
@@ -258,6 +260,28 @@ describe("post modules", () => {
     assert.equal(calls[0].url, `https://api.ampost.io/api/posts/${POST_ID}`);
     assert.equal(calls[0].body, undefined);
     assert.deepEqual(bundles, [sample("deletePost")]);
+  });
+
+  it("Unpublish a post: every published account, or the chosen ones", async () => {
+    const all = await run("unpublishPost", { postId: POST_ID });
+    assert.equal(all.calls[0].method, "POST");
+    assert.equal(all.calls[0].url, `https://api.ampost.io/api/posts/${POST_ID}/unpublish`);
+    assert.deepEqual(all.calls[0].body, {});
+    const some = await run("unpublishPost", { postId: POST_ID, accountIds: [ACCOUNT_ID] });
+    assert.deepEqual(some.calls[0].body, { accountIds: [ACCOUNT_ID] });
+    assert.deepEqual(some.bundles, [sample("unpublishPost")]);
+    assertInterfaceCovers("unpublishPost", some.bundles[0]);
+  });
+
+  it("Edit a published post: the new text, on every published account or the chosen ones", async () => {
+    const all = await run("editPublishedPost", { postId: POST_ID, text: "Fixed" });
+    assert.equal(all.calls[0].method, "POST");
+    assert.equal(all.calls[0].url, `https://api.ampost.io/api/posts/${POST_ID}/edit-published`);
+    assert.deepEqual(all.calls[0].body, { text: "Fixed" });
+    const some = await run("editPublishedPost", { postId: POST_ID, text: "Fixed", accountIds: [ACCOUNT_ID] });
+    assert.deepEqual(some.calls[0].body, { text: "Fixed", accountIds: [ACCOUNT_ID] });
+    assert.deepEqual(some.bundles, [sample("editPublishedPost")]);
+    assertInterfaceCovers("editPublishedPost", some.bundles[0]);
   });
 
   it("API errors show the message and code from the error body", async () => {

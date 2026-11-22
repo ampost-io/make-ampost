@@ -1,0 +1,18 @@
+[
+	{
+		"name": "postId",
+		"type": "text",
+		"label": "Post ID",
+		"required": true,
+		"help": "The `id` of an Ampost post, for example from **Create a post** or **Search posts**."
+	},
+	{
+		"name": "accountIds",
+		"type": "select",
+		"label": "Accounts",
+		"multiple": true,
+		"options": "rpc://listAccountOptions",
+		"mode": "edit",
+		"help": "Leave empty to delete the post from every account where it is published. Instagram and TikTok have no delete API: those accounts keep it, with a notice saying so."
+	}
+]

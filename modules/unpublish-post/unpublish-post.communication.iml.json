@@ -1,0 +1,10 @@
+{
+	"url": "/api/posts/{{encodeURL(parameters.postId)}}/unpublish",
+	"method": "POST",
+	"body": {
+		"{{...}}": "{{omit(parameters, 'postId')}}"
+	},
+	"response": {
+		"output": "{{body}}"
+	}
+}

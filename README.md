@@ -24,6 +24,8 @@ Step-by-step guide: [Post to social media from Make](https://ampost.io/how-to/po
 | | Publish a post now | action | `POST /api/posts/{id}/publish` |
 | | Retry a failed post | action | `POST /api/posts/{id}/retry` |
 | | Delete a post | action | `DELETE /api/posts/{id}` |
+| | Unpublish a post | action | `POST /api/posts/{id}/unpublish`: deletes a published post from the platforms (Instagram and TikTok keep it, with a notice) |
+| | Edit a published post | action | `POST /api/posts/{id}/edit-published`: replaces the text (Instagram, Threads, TikTok, Bluesky and X keep theirs, with a notice) |
 | Media | Upload a media file | action | `POST /api/media/uploads`, then the file goes straight to storage; returns the URL for Create a post |
 | Accounts | List accounts | search | `GET /api/accounts` |
 | | List platform sets | search | `GET /api/platform-sets` |

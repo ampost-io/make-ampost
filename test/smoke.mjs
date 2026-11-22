@@ -47,6 +47,8 @@ const PROBES = {
   publishPost: { postId: UUID },
   retryPost: { postId: UUID },
   deletePost: { postId: UUID },
+  unpublishPost: { postId: UUID },
+  editPublishedPost: { postId: UUID, text: "smoke" },
   listPosts: { limit: 1 },
   uploadMedia: { fileName: "smoke.jpg", data: Buffer.from("x") },
   listAccounts: { limit: 1 },

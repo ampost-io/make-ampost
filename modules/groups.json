@@ -8,7 +8,9 @@
 			"listPosts",
 			"publishPost",
 			"retryPost",
-			"deletePost"
+			"deletePost",
+			"unpublishPost",
+			"editPublishedPost"
 		]
 	},
 	{

@@ -161,6 +161,38 @@
 					"scope": null
 				}
 			},
+			"unpublishPost": {
+				"label": "Unpublish a post",
+				"description": "Deletes a published post from the platforms. Instagram and TikTok have no delete API: those accounts keep it, with a notice.",
+				"moduleType": "action",
+				"actionCrud": "delete",
+				"connection": "ampost",
+				"altConnection": null,
+				"codeFiles": {
+					"communication": "modules/unpublish-post/unpublish-post.communication.iml.json",
+					"staticParams": "modules/unpublish-post/unpublish-post.static-params.iml.json",
+					"mappableParams": "modules/unpublish-post/unpublish-post.mappable-params.iml.json",
+					"interface": "modules/unpublish-post/unpublish-post.interface.iml.json",
+					"samples": "modules/unpublish-post/unpublish-post.samples.iml.json",
+					"scope": null
+				}
+			},
+			"editPublishedPost": {
+				"label": "Edit a published post",
+				"description": "Replaces the text of a published post on the platforms. Media and links stay. Instagram, Threads, TikTok, Bluesky and X have no edit API: those accounts keep their text, with a notice.",
+				"moduleType": "action",
+				"actionCrud": "update",
+				"connection": "ampost",
+				"altConnection": null,
+				"codeFiles": {
+					"communication": "modules/edit-published-post/edit-published-post.communication.iml.json",
+					"staticParams": "modules/edit-published-post/edit-published-post.static-params.iml.json",
+					"mappableParams": "modules/edit-published-post/edit-published-post.mappable-params.iml.json",
+					"interface": "modules/edit-published-post/edit-published-post.interface.iml.json",
+					"samples": "modules/edit-published-post/edit-published-post.samples.iml.json",
+					"scope": null
+				}
+			},
 			"uploadMedia": {
 				"label": "Upload a media file",
 				"description": "Uploads an image or video file and returns its public URL for Create a post.",
