@@ -1,0 +1,324 @@
+[
+	{
+		"name": "eventId",
+		"type": "text",
+		"label": "Event ID"
+	},
+	{
+		"name": "type",
+		"type": "text",
+		"label": "Event type"
+	},
+	{
+		"name": "createdAt",
+		"type": "date",
+		"label": "Event time"
+	},
+	{
+		"name": "post",
+		"type": "collection",
+		"label": "Post",
+		"spec": [
+			{
+				"name": "id",
+				"type": "text",
+				"label": "Post ID"
+			},
+			{
+				"name": "status",
+				"type": "text",
+				"label": "Status"
+			},
+			{
+				"name": "text",
+				"type": "text",
+				"label": "Text"
+			},
+			{
+				"name": "platforms",
+				"type": "array",
+				"label": "Platforms",
+				"spec": {
+					"type": "text"
+				}
+			},
+			{
+				"name": "targets",
+				"type": "array",
+				"label": "Targets",
+				"spec": [
+					{
+						"name": "platformSetId",
+						"type": "text",
+						"label": "Platform set ID"
+					},
+					{
+						"name": "platforms",
+						"type": "array",
+						"label": "Platforms",
+						"spec": {
+							"type": "text"
+						}
+					}
+				]
+			},
+			{
+				"name": "linkUrl",
+				"type": "url",
+				"label": "Link URL"
+			},
+			{
+				"name": "firstComment",
+				"type": "text",
+				"label": "First comment"
+			},
+			{
+				"name": "media",
+				"type": "array",
+				"label": "Media",
+				"spec": [
+					{
+						"name": "url",
+						"type": "url",
+						"label": "URL"
+					},
+					{
+						"name": "type",
+						"type": "text",
+						"label": "Type"
+					},
+					{
+						"name": "mimeType",
+						"type": "text",
+						"label": "MIME type"
+					},
+					{
+						"name": "altText",
+						"type": "text",
+						"label": "Alt text"
+					}
+				]
+			},
+			{
+				"name": "mediaFit",
+				"type": "text",
+				"label": "Media fit"
+			},
+			{
+				"name": "thread",
+				"type": "array",
+				"label": "Thread",
+				"spec": [
+					{
+						"name": "text",
+						"type": "text",
+						"label": "Text"
+					}
+				]
+			},
+			{
+				"name": "options",
+				"type": "any",
+				"label": "Platform options"
+			},
+			{
+				"name": "scheduledFor",
+				"type": "date",
+				"label": "Scheduled for"
+			},
+			{
+				"name": "queuePlatformSetId",
+				"type": "text",
+				"label": "Queue platform set ID"
+			},
+			{
+				"name": "source",
+				"type": "text",
+				"label": "Source"
+			},
+			{
+				"name": "metadata",
+				"type": "any",
+				"label": "Metadata"
+			},
+			{
+				"name": "platformPosts",
+				"type": "array",
+				"label": "Platform posts",
+				"spec": [
+					{
+						"name": "platform",
+						"type": "text",
+						"label": "Platform"
+					},
+					{
+						"name": "accountId",
+						"type": "text",
+						"label": "Account ID"
+					},
+					{
+						"name": "platformSetId",
+						"type": "text",
+						"label": "Platform set ID"
+					},
+					{
+						"name": "status",
+						"type": "text",
+						"label": "Status"
+					},
+					{
+						"name": "platformPostId",
+						"type": "text",
+						"label": "Platform post ID"
+					},
+					{
+						"name": "publishedUrl",
+						"type": "url",
+						"label": "Published URL"
+					},
+					{
+						"name": "text",
+						"type": "text",
+						"label": "Text"
+					},
+					{
+						"name": "error",
+						"type": "collection",
+						"label": "Error",
+						"spec": [
+							{
+								"name": "code",
+								"type": "text",
+								"label": "Code"
+							},
+							{
+								"name": "message",
+								"type": "text",
+								"label": "Message"
+							},
+							{
+								"name": "retryable",
+								"type": "boolean",
+								"label": "Retryable"
+							}
+						]
+					},
+					{
+						"name": "attempts",
+						"type": "uinteger",
+						"label": "Attempts"
+					},
+					{
+						"name": "nextAttemptAt",
+						"type": "date",
+						"label": "Next attempt at"
+					},
+					{
+						"name": "createdAt",
+						"type": "date",
+						"label": "Created at"
+					},
+					{
+						"name": "updatedAt",
+						"type": "date",
+						"label": "Updated at"
+					}
+				]
+			},
+			{
+				"name": "createdAt",
+				"type": "date",
+				"label": "Created at"
+			},
+			{
+				"name": "updatedAt",
+				"type": "date",
+				"label": "Updated at"
+			}
+		]
+	},
+	{
+		"name": "platformPost",
+		"type": "collection",
+		"label": "Platform post (post.platform.* events)",
+		"spec": [
+			{
+				"name": "platform",
+				"type": "text",
+				"label": "Platform"
+			},
+			{
+				"name": "accountId",
+				"type": "text",
+				"label": "Account ID"
+			},
+			{
+				"name": "platformSetId",
+				"type": "text",
+				"label": "Platform set ID"
+			},
+			{
+				"name": "status",
+				"type": "text",
+				"label": "Status"
+			},
+			{
+				"name": "platformPostId",
+				"type": "text",
+				"label": "Platform post ID"
+			},
+			{
+				"name": "publishedUrl",
+				"type": "url",
+				"label": "Published URL"
+			},
+			{
+				"name": "text",
+				"type": "text",
+				"label": "Text"
+			},
+			{
+				"name": "error",
+				"type": "collection",
+				"label": "Error",
+				"spec": [
+					{
+						"name": "code",
+						"type": "text",
+						"label": "Code"
+					},
+					{
+						"name": "message",
+						"type": "text",
+						"label": "Message"
+					},
+					{
+						"name": "retryable",
+						"type": "boolean",
+						"label": "Retryable"
+					}
+				]
+			},
+			{
+				"name": "attempts",
+				"type": "uinteger",
+				"label": "Attempts"
+			},
+			{
+				"name": "nextAttemptAt",
+				"type": "date",
+				"label": "Next attempt at"
+			},
+			{
+				"name": "createdAt",
+				"type": "date",
+				"label": "Created at"
+			},
+			{
+				"name": "updatedAt",
+				"type": "date",
+				"label": "Updated at"
+			}
+		]
+	}
+]

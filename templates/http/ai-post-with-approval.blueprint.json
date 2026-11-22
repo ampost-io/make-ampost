@@ -1,0 +1,181 @@
+{
+  "name": "AI-written post with approval (1 of 2: write and ask) (HTTP)",
+  "flow": [
+    {
+      "id": 1,
+      "module": "gateway:CustomWebHook",
+      "version": 1,
+      "parameters": {
+        "hook": null,
+        "maxResults": 1
+      },
+      "mapper": {},
+      "metadata": {
+        "designer": {
+          "x": 0,
+          "y": 0
+        }
+      }
+    },
+    {
+      "id": 2,
+      "module": "openai-gpt-3:CreateCompletion",
+      "version": 1,
+      "parameters": {
+        "__IMTCONN__": null
+      },
+      "mapper": {
+        "select": "chat",
+        "model": "gpt-4o-mini",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You write short social media posts for our brand. Plain text, at most 280 characters, no hashtags unless asked, no quotes around the post."
+          },
+          {
+            "role": "user",
+            "content": "Write a post about: {{1.topic}}"
+          }
+        ],
+        "max_tokens": "300",
+        "temperature": "0.7",
+        "n_completions": "1",
+        "response_format": "text"
+      },
+      "metadata": {
+        "designer": {
+          "x": 600,
+          "y": 0
+        }
+      }
+    },
+    {
+      "id": 3,
+      "module": "json:TransformToJSON",
+      "version": 1,
+      "parameters": {
+        "space": ""
+      },
+      "mapper": {
+        "object": "{{2.result}}"
+      },
+      "metadata": {
+        "designer": {
+          "x": 900,
+          "y": 0
+        }
+      }
+    },
+    {
+      "id": 4,
+      "module": "http:ActionSendData",
+      "version": 3,
+      "parameters": {
+        "handleErrors": true,
+        "useNewZLibDeCompress": true
+      },
+      "mapper": {
+        "ca": "",
+        "qs": [],
+        "url": "https://api.ampost.io/api/posts",
+        "gzip": true,
+        "method": "post",
+        "headers": [
+          {
+            "name": "Authorization",
+            "value": "Bearer YOUR_AMPOST_API_KEY"
+          },
+          {
+            "name": "Idempotency-Key",
+            "value": "ai-{{md5(2.result)}}"
+          }
+        ],
+        "timeout": "",
+        "useMtls": false,
+        "authPass": "",
+        "authUser": "",
+        "bodyType": "raw",
+        "contentType": "application/json",
+        "data": "{\"targets\": [{\"platforms\": [\"linkedin\",\"facebook\",\"threads\",\"twitter\",\"bluesky\",\"telegram\",\"discord\"]}], \"text\": {{3.json}}}",
+        "serializeUrl": false,
+        "shareCookies": false,
+        "parseResponse": true,
+        "followRedirect": true,
+        "useQuerystring": false,
+        "followAllRedirects": false,
+        "rejectUnauthorized": true
+      },
+      "metadata": {
+        "designer": {
+          "x": 1200,
+          "y": 0
+        }
+      }
+    },
+    {
+      "id": 5,
+      "module": "google-email:ActionSendEmail",
+      "version": 2,
+      "parameters": {
+        "__IMTCONN__": null
+      },
+      "mapper": {
+        "to": [
+          "you@example.com"
+        ],
+        "subject": "Approve this post?",
+        "html": "<p>The AI wrote this draft:</p><blockquote>{{escapeHTML(2.result)}}</blockquote><p><a href=\"YOUR_APPROVAL_WEBHOOK_URL?postId={{4.data.id}}&token=YOUR_APPROVAL_TOKEN\">Approve and publish now</a></p><p>Or edit or delete the draft in Ampost: https://ampost.io/app</p>",
+        "cc": [],
+        "bcc": [],
+        "attachments": []
+      },
+      "metadata": {
+        "designer": {
+          "x": 1500,
+          "y": 0
+        }
+      }
+    },
+    {
+      "id": 6,
+      "module": "gateway:WebhookRespond",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "body": "{\"postId\": \"{{4.data.id}}\", \"status\": \"{{4.data.status}}\"}",
+        "status": "200",
+        "headers": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ]
+      },
+      "metadata": {
+        "designer": {
+          "x": 1800,
+          "y": 0
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "instant": true,
+    "version": 1,
+    "designer": {
+      "orphans": []
+    },
+    "scenario": {
+      "dlq": false,
+      "slots": null,
+      "dataloss": false,
+      "maxErrors": 3,
+      "autoCommit": true,
+      "roundtrips": 1,
+      "sequential": false,
+      "confidential": false,
+      "freshVariables": false,
+      "autoCommitTriggerLast": true
+    }
+  }
+}

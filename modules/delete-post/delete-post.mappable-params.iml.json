@@ -1,0 +1,9 @@
+[
+	{
+		"name": "postId",
+		"type": "text",
+		"label": "Post ID",
+		"required": true,
+		"help": "The `id` of an Ampost post, for example from **Create a post** or **Search posts**."
+	}
+]

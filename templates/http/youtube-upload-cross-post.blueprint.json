@@ -1,0 +1,104 @@
+{
+  "name": "Cross-post new YouTube uploads (HTTP)",
+  "flow": [
+    {
+      "id": 1,
+      "module": "youtube:watchVideosInAChannel",
+      "version": 1,
+      "parameters": {
+        "__IMTCONN__": null,
+        "channelId": "YOUR_CHANNEL_ID",
+        "limit": 1
+      },
+      "mapper": {},
+      "metadata": {
+        "designer": {
+          "x": 0,
+          "y": 0
+        }
+      }
+    },
+    {
+      "id": 2,
+      "module": "json:TransformToJSON",
+      "version": 1,
+      "parameters": {
+        "space": ""
+      },
+      "mapper": {
+        "object": "New video: {{1.title}}"
+      },
+      "metadata": {
+        "designer": {
+          "x": 600,
+          "y": 0
+        }
+      }
+    },
+    {
+      "id": 3,
+      "module": "http:ActionSendData",
+      "version": 3,
+      "parameters": {
+        "handleErrors": true,
+        "useNewZLibDeCompress": true
+      },
+      "mapper": {
+        "ca": "",
+        "qs": [],
+        "url": "https://api.ampost.io/api/posts",
+        "gzip": true,
+        "method": "post",
+        "headers": [
+          {
+            "name": "Authorization",
+            "value": "Bearer YOUR_AMPOST_API_KEY"
+          },
+          {
+            "name": "Idempotency-Key",
+            "value": "youtube-{{1.id}}"
+          }
+        ],
+        "timeout": "",
+        "useMtls": false,
+        "authPass": "",
+        "authUser": "",
+        "bodyType": "raw",
+        "contentType": "application/json",
+        "data": "{\"targets\": [{\"platforms\": [\"linkedin\",\"facebook\",\"threads\",\"twitter\",\"bluesky\",\"telegram\",\"discord\"]}], \"text\": {{2.json}}, \"linkUrl\": \"https://www.youtube.com/watch?v={{1.id}}\", \"publishNow\": true}",
+        "serializeUrl": false,
+        "shareCookies": false,
+        "parseResponse": true,
+        "followRedirect": true,
+        "useQuerystring": false,
+        "followAllRedirects": false,
+        "rejectUnauthorized": true
+      },
+      "metadata": {
+        "designer": {
+          "x": 900,
+          "y": 0
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "instant": false,
+    "version": 1,
+    "designer": {
+      "orphans": []
+    },
+    "scenario": {
+      "dlq": false,
+      "slots": null,
+      "dataloss": false,
+      "maxErrors": 3,
+      "autoCommit": true,
+      "roundtrips": 1,
+      "sequential": false,
+      "confidential": false,
+      "freshVariables": false,
+      "autoCommitTriggerLast": true
+    }
+  }
+}

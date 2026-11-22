@@ -1,0 +1,107 @@
+[
+	{
+		"name": "valid",
+		"type": "boolean",
+		"label": "Valid"
+	},
+	{
+		"name": "errors",
+		"type": "array",
+		"label": "Errors",
+		"spec": [
+			{
+				"name": "code",
+				"type": "text",
+				"label": "Code"
+			},
+			{
+				"name": "message",
+				"type": "text",
+				"label": "Message"
+			}
+		]
+	},
+	{
+		"name": "warnings",
+		"type": "array",
+		"label": "Warnings",
+		"spec": [
+			{
+				"name": "code",
+				"type": "text",
+				"label": "Code"
+			},
+			{
+				"name": "message",
+				"type": "text",
+				"label": "Message"
+			}
+		]
+	},
+	{
+		"name": "scheduledFor",
+		"type": "date",
+		"label": "Scheduled for"
+	},
+	{
+		"name": "targets",
+		"type": "array",
+		"label": "Targets",
+		"spec": [
+			{
+				"name": "platform",
+				"type": "text",
+				"label": "Platform"
+			},
+			{
+				"name": "platformSetId",
+				"type": "text",
+				"label": "Platform set ID"
+			},
+			{
+				"name": "accountId",
+				"type": "text",
+				"label": "Account ID"
+			},
+			{
+				"name": "valid",
+				"type": "boolean",
+				"label": "Valid"
+			},
+			{
+				"name": "errors",
+				"type": "array",
+				"label": "Errors",
+				"spec": [
+					{
+						"name": "code",
+						"type": "text",
+						"label": "Code"
+					},
+					{
+						"name": "message",
+						"type": "text",
+						"label": "Message"
+					}
+				]
+			},
+			{
+				"name": "warnings",
+				"type": "array",
+				"label": "Warnings",
+				"spec": [
+					{
+						"name": "code",
+						"type": "text",
+						"label": "Code"
+					},
+					{
+						"name": "message",
+						"type": "text",
+						"label": "Message"
+					}
+				]
+			}
+		]
+	}
+]

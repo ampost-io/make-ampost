@@ -1,0 +1,19 @@
+{
+	"url": "/api/analytics/followers",
+	"method": "GET",
+	"qs": {
+		"{{...}}": "{{omit(parameters, 'limit')}}",
+		"limit": 100
+	},
+	"response": {
+		"limit": "{{parameters.limit}}",
+		"iterate": "{{body.data}}",
+		"output": "{{item}}"
+	},
+	"pagination": {
+		"qs": {
+			"offset": "{{(pagination.page - 1) * 100}}"
+		},
+		"condition": "{{body.pagination.hasMore}}"
+	}
+}

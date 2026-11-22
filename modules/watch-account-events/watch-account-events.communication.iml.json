@@ -1,0 +1,12 @@
+{
+	"url": "/api/accounts/{{encodeURL(payload.data.account.id)}}",
+	"method": "GET",
+	"response": {
+		"output": {
+			"eventId": "{{payload.id}}",
+			"type": "{{payload.type}}",
+			"createdAt": "{{payload.createdAt}}",
+			"account": "{{body}}"
+		}
+	}
+}

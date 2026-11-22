@@ -1,0 +1,202 @@
+[
+	{
+		"name": "from",
+		"type": "text",
+		"label": "From"
+	},
+	{
+		"name": "to",
+		"type": "text",
+		"label": "To"
+	},
+	{
+		"name": "totals",
+		"type": "collection",
+		"label": "Totals",
+		"spec": [
+			{
+				"name": "posts",
+				"type": "uinteger",
+				"label": "Posts"
+			},
+			{
+				"name": "followers",
+				"type": "number",
+				"label": "Followers"
+			},
+			{
+				"name": "followersChange",
+				"type": "number",
+				"label": "Followers change"
+			},
+			{
+				"name": "metrics",
+				"type": "collection",
+				"label": "Metrics",
+				"spec": [
+					{
+						"name": "views",
+						"type": "number",
+						"label": "Views"
+					},
+					{
+						"name": "reach",
+						"type": "number",
+						"label": "Reach"
+					},
+					{
+						"name": "likes",
+						"type": "number",
+						"label": "Likes"
+					},
+					{
+						"name": "comments",
+						"type": "number",
+						"label": "Comments"
+					},
+					{
+						"name": "shares",
+						"type": "number",
+						"label": "Shares"
+					},
+					{
+						"name": "saves",
+						"type": "number",
+						"label": "Saves"
+					},
+					{
+						"name": "quotes",
+						"type": "number",
+						"label": "Quotes"
+					}
+				]
+			}
+		]
+	},
+	{
+		"name": "accounts",
+		"type": "array",
+		"label": "Accounts",
+		"spec": [
+			{
+				"name": "accountId",
+				"type": "text",
+				"label": "Account ID"
+			},
+			{
+				"name": "platform",
+				"type": "text",
+				"label": "Platform"
+			},
+			{
+				"name": "platformSetId",
+				"type": "text",
+				"label": "Platform set ID"
+			},
+			{
+				"name": "username",
+				"type": "text",
+				"label": "Username"
+			},
+			{
+				"name": "posts",
+				"type": "uinteger",
+				"label": "Posts"
+			},
+			{
+				"name": "followers",
+				"type": "number",
+				"label": "Followers"
+			},
+			{
+				"name": "followersChange",
+				"type": "number",
+				"label": "Followers change"
+			},
+			{
+				"name": "metrics",
+				"type": "collection",
+				"label": "Metrics",
+				"spec": [
+					{
+						"name": "views",
+						"type": "number",
+						"label": "Views"
+					},
+					{
+						"name": "reach",
+						"type": "number",
+						"label": "Reach"
+					},
+					{
+						"name": "likes",
+						"type": "number",
+						"label": "Likes"
+					},
+					{
+						"name": "comments",
+						"type": "number",
+						"label": "Comments"
+					},
+					{
+						"name": "shares",
+						"type": "number",
+						"label": "Shares"
+					},
+					{
+						"name": "saves",
+						"type": "number",
+						"label": "Saves"
+					},
+					{
+						"name": "quotes",
+						"type": "number",
+						"label": "Quotes"
+					}
+				]
+			},
+			{
+				"name": "syncState",
+				"type": "text",
+				"label": "Sync state"
+			},
+			{
+				"name": "syncedAt",
+				"type": "date",
+				"label": "Synced at"
+			},
+			{
+				"name": "nextSyncAt",
+				"type": "date",
+				"label": "Next sync at"
+			}
+		]
+	},
+	{
+		"name": "unavailableAccounts",
+		"type": "array",
+		"label": "Accounts without analytics",
+		"spec": [
+			{
+				"name": "accountId",
+				"type": "text",
+				"label": "Account ID"
+			},
+			{
+				"name": "platform",
+				"type": "text",
+				"label": "Platform"
+			},
+			{
+				"name": "platformSetId",
+				"type": "text",
+				"label": "Platform set ID"
+			},
+			{
+				"name": "reason",
+				"type": "text",
+				"label": "Reason"
+			}
+		]
+	}
+]

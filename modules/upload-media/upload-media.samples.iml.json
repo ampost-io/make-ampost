@@ -1,0 +1,11 @@
+{
+	"uploadId": "c0ffee00-1234-4abc-8def-0123456789ab",
+	"status": "completed",
+	"url": "https://media.ampost.io/u/launch-a1b2c3.mp4",
+	"type": "video",
+	"mimeType": "video/mp4",
+	"sizeBytes": 18234112,
+	"width": 1080,
+	"height": 1920,
+	"durationSeconds": 21.4
+}

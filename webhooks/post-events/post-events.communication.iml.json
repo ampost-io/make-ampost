@@ -1,0 +1,11 @@
+{
+	"condition": "{{body.type != 'webhook.test'}}",
+	"respond": {
+		"status": 200,
+		"type": "json",
+		"body": {
+			"received": true
+		}
+	},
+	"output": "{{body}}"
+}

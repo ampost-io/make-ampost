@@ -1,0 +1,19 @@
+[
+	{
+		"name": "postId",
+		"type": "text",
+		"label": "Post ID",
+		"required": true,
+		"help": "The `id` of an Ampost post, for example from **Create a post** or **Search posts**."
+	},
+	{
+		"name": "Idempotency-Key",
+		"type": "text",
+		"label": "Idempotency key",
+		"advanced": true,
+		"validate": {
+			"pattern": "^[\\x21-\\x7e]{1,255}$"
+		},
+		"help": "Optional. 1-255 visible ASCII characters, for example a UUID or the ID of the item this publish comes from. If Make runs the module again with the same key and the same input within 24 hours, Ampost returns the first result instead of running again."
+	}
+]

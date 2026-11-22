@@ -1,0 +1,20 @@
+{
+	"url": "/api/webhooks/endpoints",
+	"method": "POST",
+	"body": {
+		"url": "{{webhook.url}}",
+		"events": "{{parameters.events}}",
+		"description": "Make: Watch account events"
+	},
+	"response": {
+		"data": {
+			"externalHookId": "{{body.id}}"
+		}
+	},
+	"log": {
+		"sanitize": [
+			"request.headers.authorization",
+			"response.body.secret"
+		]
+	}
+}

@@ -1,0 +1,60 @@
+[
+	{
+		"url": "/api/media/uploads",
+		"method": "POST",
+		"body": {
+			"fileName": "{{parameters.fileName}}"
+		},
+		"response": {
+			"temp": {
+				"uploadId": "{{body.id}}",
+				"uploadUrl": "{{body.uploadUrl}}",
+				"uploadHeaders": "{{body.headers}}"
+			}
+		}
+	},
+	{
+		"url": "{{temp.uploadUrl}}",
+		"method": "PUT",
+		"headers": {
+			"{{...}}": "{{temp.uploadHeaders}}",
+			"authorization": "{{temp.uploadHeaders.authorization}}"
+		},
+		"type": "binary",
+		"body": "{{parameters.data}}",
+		"log": {
+			"sanitize": [
+				"request.headers.authorization"
+			]
+		}
+	},
+	{
+		"url": "/api/media/uploads/{{temp.uploadId}}",
+		"method": "GET",
+		"repeat": {
+			"condition": "{{temp.status == 'pending'}}",
+			"delay": 2000,
+			"limit": 12
+		},
+		"response": {
+			"temp": {
+				"status": "{{body.status}}"
+			},
+			"valid": {
+				"condition": "{{body.status != 'failed' && body.status != 'expired'}}",
+				"message": "The upload {{body.status}}: {{ifempty(body.error, 'no detail')}}"
+			},
+			"output": {
+				"uploadId": "{{body.id}}",
+				"status": "{{body.status}}",
+				"url": "{{body.files[1].url}}",
+				"type": "{{body.files[1].type}}",
+				"mimeType": "{{body.files[1].mimeType}}",
+				"sizeBytes": "{{body.files[1].sizeBytes}}",
+				"width": "{{body.files[1].width}}",
+				"height": "{{body.files[1].height}}",
+				"durationSeconds": "{{body.files[1].durationSeconds}}"
+			}
+		}
+	}
+]

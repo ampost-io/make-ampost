@@ -1,0 +1,49 @@
+[
+	{
+		"label": "Posts",
+		"modules": [
+			"createPost",
+			"validatePost",
+			"getPost",
+			"listPosts",
+			"publishPost",
+			"retryPost",
+			"deletePost"
+		]
+	},
+	{
+		"label": "Media",
+		"modules": [
+			"uploadMedia"
+		]
+	},
+	{
+		"label": "Accounts and queue",
+		"modules": [
+			"listAccounts",
+			"listPlatformSets",
+			"getQueueSlots"
+		]
+	},
+	{
+		"label": "Analytics",
+		"modules": [
+			"listPostAnalytics",
+			"getAnalyticsOverview",
+			"listFollowers"
+		]
+	},
+	{
+		"label": "Triggers",
+		"modules": [
+			"watchPostEvents",
+			"watchAccountEvents"
+		]
+	},
+	{
+		"label": "Other",
+		"modules": [
+			"makeApiCall"
+		]
+	}
+]

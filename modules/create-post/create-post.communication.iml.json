@@ -1,0 +1,18 @@
+{
+	"url": "/api/posts",
+	"method": "POST",
+	"headers": {
+		"{{...}}": "{{pick(parameters, 'Idempotency-Key')}}"
+	},
+	"body": {
+		"{{...}}": "{{omit(parameters, 'when', 'scheduledFor', 'options', 'metadata', 'Idempotency-Key')}}",
+		"options": "{{if(parameters.options, parseJSON(ifempty(parameters.options, 'null')), undefined)}}",
+		"metadata": "{{if(parameters.metadata, toCollection(ifempty(parameters.metadata, emptyarray), 'key', 'value'), undefined)}}",
+		"scheduledFor": "{{if(parameters.when == 'schedule', parameters.scheduledFor, undefined)}}",
+		"publishNow": "{{if(parameters.when == 'now', true, undefined)}}",
+		"useQueue": "{{if(parameters.when == 'queue', true, undefined)}}"
+	},
+	"response": {
+		"output": "{{body}}"
+	}
+}

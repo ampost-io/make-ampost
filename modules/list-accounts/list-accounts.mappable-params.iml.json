@@ -1,0 +1,89 @@
+[
+	{
+		"name": "platform",
+		"type": "select",
+		"label": "Platform",
+		"options": [
+			{
+				"label": "Instagram",
+				"value": "instagram"
+			},
+			{
+				"label": "Facebook",
+				"value": "facebook"
+			},
+			{
+				"label": "LinkedIn",
+				"value": "linkedin"
+			},
+			{
+				"label": "TikTok",
+				"value": "tiktok"
+			},
+			{
+				"label": "Threads",
+				"value": "threads"
+			},
+			{
+				"label": "X (Twitter)",
+				"value": "twitter"
+			},
+			{
+				"label": "Discord",
+				"value": "discord"
+			},
+			{
+				"label": "Telegram",
+				"value": "telegram"
+			},
+			{
+				"label": "Bluesky",
+				"value": "bluesky"
+			},
+			{
+				"label": "YouTube",
+				"value": "youtube"
+			},
+			{
+				"label": "Pinterest",
+				"value": "pinterest"
+			}
+		],
+		"help": "Only this platform."
+	},
+	{
+		"name": "platformSetId",
+		"type": "select",
+		"label": "Platform set",
+		"options": "rpc://listPlatformSetOptions",
+		"mode": "edit",
+		"help": "Only accounts in this platform set."
+	},
+	{
+		"name": "status",
+		"type": "select",
+		"label": "Status",
+		"options": [
+			{
+				"label": "Active (default)",
+				"value": "active"
+			},
+			{
+				"label": "Revoked",
+				"value": "revoked"
+			},
+			{
+				"label": "All",
+				"value": "all"
+			}
+		]
+	},
+	{
+		"name": "limit",
+		"type": "uinteger",
+		"label": "Limit",
+		"default": 10,
+		"required": true,
+		"help": "Maximum number of results to work with during one execution cycle."
+	}
+]

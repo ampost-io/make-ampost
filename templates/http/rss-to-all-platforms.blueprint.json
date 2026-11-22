@@ -1,0 +1,121 @@
+{
+  "name": "RSS feed to all platforms (HTTP)",
+  "flow": [
+    {
+      "id": 1,
+      "module": "rss:TriggerNewArticle",
+      "version": 4,
+      "parameters": {
+        "url": "https://example.com/feed.xml",
+        "maxResults": 1,
+        "include": []
+      },
+      "mapper": {},
+      "metadata": {
+        "designer": {
+          "x": 0,
+          "y": 0
+        }
+      }
+    },
+    {
+      "id": 2,
+      "module": "json:TransformToJSON",
+      "version": 1,
+      "parameters": {
+        "space": ""
+      },
+      "mapper": {
+        "object": "{{1.title}}"
+      },
+      "metadata": {
+        "designer": {
+          "x": 600,
+          "y": 0
+        }
+      }
+    },
+    {
+      "id": 3,
+      "module": "json:TransformToJSON",
+      "version": 1,
+      "parameters": {
+        "space": ""
+      },
+      "mapper": {
+        "object": "{{1.url}}"
+      },
+      "metadata": {
+        "designer": {
+          "x": 900,
+          "y": 0
+        }
+      }
+    },
+    {
+      "id": 4,
+      "module": "http:ActionSendData",
+      "version": 3,
+      "parameters": {
+        "handleErrors": true,
+        "useNewZLibDeCompress": true
+      },
+      "mapper": {
+        "ca": "",
+        "qs": [],
+        "url": "https://api.ampost.io/api/posts",
+        "gzip": true,
+        "method": "post",
+        "headers": [
+          {
+            "name": "Authorization",
+            "value": "Bearer YOUR_AMPOST_API_KEY"
+          },
+          {
+            "name": "Idempotency-Key",
+            "value": "rss-{{md5(1.url)}}"
+          }
+        ],
+        "timeout": "",
+        "useMtls": false,
+        "authPass": "",
+        "authUser": "",
+        "bodyType": "raw",
+        "contentType": "application/json",
+        "data": "{\"targets\": [{\"platforms\": [\"linkedin\",\"facebook\",\"threads\",\"twitter\",\"bluesky\",\"telegram\",\"discord\"]}], \"text\": {{2.json}}, \"linkUrl\": {{3.json}}, \"publishNow\": true}",
+        "serializeUrl": false,
+        "shareCookies": false,
+        "parseResponse": true,
+        "followRedirect": true,
+        "useQuerystring": false,
+        "followAllRedirects": false,
+        "rejectUnauthorized": true
+      },
+      "metadata": {
+        "designer": {
+          "x": 1200,
+          "y": 0
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "instant": false,
+    "version": 1,
+    "designer": {
+      "orphans": []
+    },
+    "scenario": {
+      "dlq": false,
+      "slots": null,
+      "dataloss": false,
+      "maxErrors": 3,
+      "autoCommit": true,
+      "roundtrips": 1,
+      "sequential": false,
+      "confidential": false,
+      "freshVariables": false,
+      "autoCommitTriggerLast": true
+    }
+  }
+}

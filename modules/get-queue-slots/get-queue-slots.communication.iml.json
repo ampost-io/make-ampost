@@ -1,0 +1,17 @@
+{
+	"url": "/api/platform-sets/{{encodeURL(parameters.platformSetId)}}/queue/slots",
+	"method": "GET",
+	"qs": {
+		"{{...}}": "{{omit(parameters, 'platformSetId')}}"
+	},
+	"response": {
+		"iterate": "{{body.slots}}",
+		"output": {
+			"scheduledFor": "{{item.scheduledFor}}",
+			"postId": "{{item.postId}}",
+			"free": "{{!item.postId}}",
+			"platformSetId": "{{body.platformSetId}}",
+			"timezone": "{{body.timezone}}"
+		}
+	}
+}

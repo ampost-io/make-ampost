@@ -1,0 +1,36 @@
+[
+	{
+		"name": "platformSetId",
+		"type": "select",
+		"label": "Platform set",
+		"options": "rpc://listPlatformSetOptions",
+		"mode": "edit",
+		"required": true,
+		"help": "The platform set whose queue to read."
+	},
+	{
+		"name": "count",
+		"type": "uinteger",
+		"label": "Number of slots",
+		"default": 10,
+		"validate": {
+			"min": 1,
+			"max": 50
+		}
+	},
+	{
+		"name": "filter",
+		"type": "select",
+		"label": "Slots",
+		"options": [
+			{
+				"label": "All (default)",
+				"value": "all"
+			},
+			{
+				"label": "Free only",
+				"value": "free"
+			}
+		]
+	}
+]

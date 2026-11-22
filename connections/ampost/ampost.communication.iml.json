@@ -1,0 +1,21 @@
+{
+	"url": "https://api.ampost.io/api/docs/search",
+	"method": "GET",
+	"qs": {
+		"query": "connect",
+		"limit": 1
+	},
+	"headers": {
+		"authorization": "Bearer {{parameters.apiKey}}"
+	},
+	"response": {
+		"error": {
+			"message": "[{{statusCode}}] {{ifempty(body.error.message, 'The API key was not accepted')}}"
+		}
+	},
+	"log": {
+		"sanitize": [
+			"request.headers.authorization"
+		]
+	}
+}

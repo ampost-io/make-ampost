@@ -1,0 +1,27 @@
+{
+  "name": "make-ampost",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Source of the Ampost custom app for Make (make.com) and Make scenario templates that post to social media with the Ampost API.",
+  "license": "MIT",
+  "author": "Ampost (https://ampost.io)",
+  "homepage": "https://ampost.io/how-to/post-to-social-media-from-make?ref=github",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ampost-io/make-ampost.git"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.mjs",
+    "test:smoke": "node --test test/smoke.mjs",
+    "build:templates": "node scripts/templates.mjs",
+    "export:openapi": "curl -fsS https://api.ampost.io/openapi.json -o openapi.json"
+  },
+  "devDependencies": {
+    "ajv": "8.20.0",
+    "ajv-formats": "3.0.1"
+  }
+}

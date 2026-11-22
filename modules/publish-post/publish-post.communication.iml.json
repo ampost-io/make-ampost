@@ -1,0 +1,11 @@
+{
+	"url": "/api/posts/{{encodeURL(parameters.postId)}}/publish",
+	"method": "POST",
+	"headers": {
+		"{{...}}": "{{pick(parameters, 'Idempotency-Key')}}"
+	},
+	"body": {},
+	"response": {
+		"output": "{{body}}"
+	}
+}

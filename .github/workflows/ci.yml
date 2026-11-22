@@ -1,0 +1,45 @@
+# CI for this repo once it lives at github.com/ampost-io/make-ampost. While the code is in the Ampost
+# app repo (public-repos/make-ampost), the root workflow .github/workflows/public-repos.yml runs instead.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    # Daily: the route probe notices when the live API drops a path the app calls.
+    - cron: "41 5 * * *"
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: App files, IML, module contracts and templates
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - name: Templates match scripts/templates.mjs
+        run: npm run build:templates && git diff --exit-code -- templates
+
+  smoke:
+    name: Live API (route probe; read-only modules with the AMPOST_API_KEY secret)
+    runs-on: ubuntu-latest
+    env:
+      AMPOST_API_KEY: ${{ secrets.AMPOST_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run test:smoke
+      - name: openapi.json is the live API's
+        run: npm run export:openapi && git diff --exit-code -- openapi.json || echo "::warning::openapi.json differs from the live API; update it and run npm test"

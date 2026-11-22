@@ -1,0 +1,22 @@
+{
+	"accountId": "5d6e7f80-9a1b-4c2d-8e3f-4a5b6c7d8e9f",
+	"platform": "instagram",
+	"platformSetId": "8a1b2c3d-4e5f-4a6b-8c7d-9e0f1a2b3c4d",
+	"username": "ampost.io",
+	"followers": 5230,
+	"syncedAt": "2026-11-21T03:00:00.000Z",
+	"totalLikes": null,
+	"totalPosts": 212,
+	"history": [
+		{
+			"date": "2026-11-20",
+			"followers": 5230,
+			"syncedAt": "2026-11-21T03:00:00.000Z"
+		},
+		{
+			"date": "2026-11-19",
+			"followers": 5214,
+			"syncedAt": "2026-11-20T03:00:00.000Z"
+		}
+	]
+}

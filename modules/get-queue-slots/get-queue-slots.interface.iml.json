@@ -1,0 +1,27 @@
+[
+	{
+		"name": "scheduledFor",
+		"type": "date",
+		"label": "Slot time"
+	},
+	{
+		"name": "postId",
+		"type": "text",
+		"label": "Queued post ID"
+	},
+	{
+		"name": "free",
+		"type": "boolean",
+		"label": "Free"
+	},
+	{
+		"name": "platformSetId",
+		"type": "text",
+		"label": "Platform set ID"
+	},
+	{
+		"name": "timezone",
+		"type": "text",
+		"label": "Queue time zone"
+	}
+]

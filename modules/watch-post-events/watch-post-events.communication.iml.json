@@ -1,0 +1,13 @@
+{
+	"url": "/api/posts/{{encodeURL(payload.data.post.id)}}",
+	"method": "GET",
+	"response": {
+		"output": {
+			"eventId": "{{payload.id}}",
+			"type": "{{payload.type}}",
+			"createdAt": "{{payload.createdAt}}",
+			"post": "{{body}}",
+			"platformPost": "{{payload.data.platformPost}}"
+		}
+	}
+}

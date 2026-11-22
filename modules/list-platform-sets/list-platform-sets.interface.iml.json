@@ -1,0 +1,32 @@
+[
+	{
+		"name": "id",
+		"type": "text",
+		"label": "Platform set ID"
+	},
+	{
+		"name": "name",
+		"type": "text",
+		"label": "Name"
+	},
+	{
+		"name": "isDefault",
+		"type": "boolean",
+		"label": "Default"
+	},
+	{
+		"name": "accountCount",
+		"type": "uinteger",
+		"label": "Accounts"
+	},
+	{
+		"name": "createdAt",
+		"type": "date",
+		"label": "Created at"
+	},
+	{
+		"name": "updatedAt",
+		"type": "date",
+		"label": "Updated at"
+	}
+]

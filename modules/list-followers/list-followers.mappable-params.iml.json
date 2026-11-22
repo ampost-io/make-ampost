@@ -1,0 +1,96 @@
+[
+	{
+		"name": "from",
+		"type": "text",
+		"label": "From",
+		"validate": {
+			"pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+		},
+		"help": "First day of the history, as `YYYY-MM-DD`."
+	},
+	{
+		"name": "to",
+		"type": "text",
+		"label": "To",
+		"validate": {
+			"pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+		},
+		"help": "Last day of the history, as `YYYY-MM-DD`."
+	},
+	{
+		"name": "platform",
+		"type": "select",
+		"label": "Platform",
+		"options": [
+			{
+				"label": "Instagram",
+				"value": "instagram"
+			},
+			{
+				"label": "Facebook",
+				"value": "facebook"
+			},
+			{
+				"label": "LinkedIn",
+				"value": "linkedin"
+			},
+			{
+				"label": "TikTok",
+				"value": "tiktok"
+			},
+			{
+				"label": "Threads",
+				"value": "threads"
+			},
+			{
+				"label": "X (Twitter)",
+				"value": "twitter"
+			},
+			{
+				"label": "Discord",
+				"value": "discord"
+			},
+			{
+				"label": "Telegram",
+				"value": "telegram"
+			},
+			{
+				"label": "Bluesky",
+				"value": "bluesky"
+			},
+			{
+				"label": "YouTube",
+				"value": "youtube"
+			},
+			{
+				"label": "Pinterest",
+				"value": "pinterest"
+			}
+		],
+		"help": "Only this platform."
+	},
+	{
+		"name": "platformSetId",
+		"type": "select",
+		"label": "Platform set",
+		"options": "rpc://listPlatformSetOptions",
+		"mode": "edit",
+		"help": "Only accounts in this platform set."
+	},
+	{
+		"name": "accountId",
+		"type": "select",
+		"label": "Account",
+		"options": "rpc://listAccountOptions",
+		"mode": "edit",
+		"help": "Only this connected account."
+	},
+	{
+		"name": "limit",
+		"type": "uinteger",
+		"label": "Limit",
+		"default": 10,
+		"required": true,
+		"help": "Maximum number of results to work with during one execution cycle."
+	}
+]

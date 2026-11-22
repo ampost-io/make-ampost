@@ -1,0 +1,64 @@
+[
+	{
+		"name": "accountId",
+		"type": "text",
+		"label": "Account ID"
+	},
+	{
+		"name": "platform",
+		"type": "text",
+		"label": "Platform"
+	},
+	{
+		"name": "platformSetId",
+		"type": "text",
+		"label": "Platform set ID"
+	},
+	{
+		"name": "username",
+		"type": "text",
+		"label": "Username"
+	},
+	{
+		"name": "followers",
+		"type": "number",
+		"label": "Followers"
+	},
+	{
+		"name": "totalLikes",
+		"type": "number",
+		"label": "Total likes"
+	},
+	{
+		"name": "totalPosts",
+		"type": "number",
+		"label": "Total posts"
+	},
+	{
+		"name": "syncedAt",
+		"type": "date",
+		"label": "Synced at"
+	},
+	{
+		"name": "history",
+		"type": "array",
+		"label": "History",
+		"spec": [
+			{
+				"name": "date",
+				"type": "text",
+				"label": "Date"
+			},
+			{
+				"name": "followers",
+				"type": "number",
+				"label": "Followers"
+			},
+			{
+				"name": "syncedAt",
+				"type": "date",
+				"label": "Synced at"
+			}
+		]
+	}
+]

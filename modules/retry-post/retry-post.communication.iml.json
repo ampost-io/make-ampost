@@ -1,0 +1,13 @@
+{
+	"url": "/api/posts/{{encodeURL(parameters.postId)}}/retry",
+	"method": "POST",
+	"headers": {
+		"{{...}}": "{{pick(parameters, 'Idempotency-Key')}}"
+	},
+	"body": {
+		"{{...}}": "{{omit(parameters, 'postId', 'Idempotency-Key')}}"
+	},
+	"response": {
+		"output": "{{body}}"
+	}
+}

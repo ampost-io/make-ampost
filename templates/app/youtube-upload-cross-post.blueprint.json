@@ -1,0 +1,74 @@
+{
+  "name": "Cross-post new YouTube uploads (Ampost app)",
+  "flow": [
+    {
+      "id": 1,
+      "module": "youtube:watchVideosInAChannel",
+      "version": 1,
+      "parameters": {
+        "__IMTCONN__": null,
+        "channelId": "YOUR_CHANNEL_ID",
+        "limit": 1
+      },
+      "mapper": {},
+      "metadata": {
+        "designer": {
+          "x": 0,
+          "y": 0
+        }
+      }
+    },
+    {
+      "id": 2,
+      "module": "ampost:createPost",
+      "version": 1,
+      "parameters": {
+        "__IMTCONN__": null
+      },
+      "mapper": {
+        "targets": [
+          {
+            "platforms": [
+              "linkedin",
+              "facebook",
+              "threads",
+              "twitter",
+              "bluesky",
+              "telegram",
+              "discord"
+            ]
+          }
+        ],
+        "text": "New video: {{1.title}}",
+        "linkUrl": "https://www.youtube.com/watch?v={{1.id}}",
+        "when": "now",
+        "Idempotency-Key": "youtube-{{1.id}}"
+      },
+      "metadata": {
+        "designer": {
+          "x": 600,
+          "y": 0
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "instant": false,
+    "version": 1,
+    "designer": {
+      "orphans": []
+    },
+    "scenario": {
+      "dlq": false,
+      "slots": null,
+      "dataloss": false,
+      "maxErrors": 3,
+      "autoCommit": true,
+      "roundtrips": 1,
+      "sequential": false,
+      "confidential": false,
+      "freshVariables": false,
+      "autoCommitTriggerLast": true
+    }
+  }
+}

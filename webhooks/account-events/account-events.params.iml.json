@@ -1,0 +1,31 @@
+[
+	{
+		"name": "events",
+		"type": "select",
+		"label": "Events",
+		"multiple": true,
+		"required": true,
+		"default": [
+			"account.connected",
+			"account.disconnected",
+			"account.needs_reconnect"
+		],
+		"validate": {
+			"minItems": 1
+		},
+		"options": [
+			{
+				"label": "Account connected or reconnected",
+				"value": "account.connected"
+			},
+			{
+				"label": "Account disconnected",
+				"value": "account.disconnected"
+			},
+			{
+				"label": "Account needs to be reconnected",
+				"value": "account.needs_reconnect"
+			}
+		]
+	}
+]

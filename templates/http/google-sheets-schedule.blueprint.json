@@ -1,0 +1,150 @@
+{
+  "name": "Schedule posts from Google Sheets (HTTP)",
+  "flow": [
+    {
+      "id": 1,
+      "module": "google-sheets:watchRows",
+      "version": 2,
+      "parameters": {
+        "__IMTCONN__": null,
+        "mode": "select",
+        "spreadsheetId": "YOUR_SPREADSHEET_ID",
+        "sheetId": "Posts",
+        "includesHeaders": true,
+        "tableFirstRow": "A1:Z1",
+        "limit": 10
+      },
+      "mapper": {},
+      "metadata": {
+        "designer": {
+          "x": 0,
+          "y": 0
+        }
+      }
+    },
+    {
+      "id": 2,
+      "module": "json:TransformToJSON",
+      "version": 1,
+      "parameters": {
+        "space": ""
+      },
+      "mapper": {
+        "object": "{{1.`0`}}"
+      },
+      "metadata": {
+        "designer": {
+          "x": 600,
+          "y": 0
+        }
+      }
+    },
+    {
+      "id": 3,
+      "module": "json:TransformToJSON",
+      "version": 1,
+      "parameters": {
+        "space": ""
+      },
+      "mapper": {
+        "object": "{{ifempty(1.`2`; null)}}"
+      },
+      "metadata": {
+        "designer": {
+          "x": 900,
+          "y": 0
+        }
+      }
+    },
+    {
+      "id": 4,
+      "module": "http:ActionSendData",
+      "version": 3,
+      "parameters": {
+        "handleErrors": true,
+        "useNewZLibDeCompress": true
+      },
+      "mapper": {
+        "ca": "",
+        "qs": [],
+        "url": "https://api.ampost.io/api/posts",
+        "gzip": true,
+        "method": "post",
+        "headers": [
+          {
+            "name": "Authorization",
+            "value": "Bearer YOUR_AMPOST_API_KEY"
+          },
+          {
+            "name": "Idempotency-Key",
+            "value": "sheet-{{1.`__ROW_NUMBER__`}}-{{md5(1.`0`)}}"
+          }
+        ],
+        "timeout": "",
+        "useMtls": false,
+        "authPass": "",
+        "authUser": "",
+        "bodyType": "raw",
+        "contentType": "application/json",
+        "data": "{\"targets\": [{\"platforms\": [\"linkedin\",\"facebook\",\"threads\",\"twitter\",\"bluesky\",\"telegram\",\"discord\"]}], \"text\": {{2.json}}, \"linkUrl\": {{3.json}}, \"scheduledFor\": \"{{1.`1`}}\"}",
+        "serializeUrl": false,
+        "shareCookies": false,
+        "parseResponse": true,
+        "followRedirect": true,
+        "useQuerystring": false,
+        "followAllRedirects": false,
+        "rejectUnauthorized": true
+      },
+      "metadata": {
+        "designer": {
+          "x": 1200,
+          "y": 0
+        }
+      }
+    },
+    {
+      "id": 5,
+      "module": "google-sheets:updateRow",
+      "version": 2,
+      "parameters": {
+        "__IMTCONN__": null
+      },
+      "mapper": {
+        "mode": "select",
+        "spreadsheetId": "YOUR_SPREADSHEET_ID",
+        "sheetId": "Posts",
+        "includesHeaders": true,
+        "rowNumber": "{{1.`__ROW_NUMBER__`}}",
+        "values": {
+          "3": "{{4.data.id}}",
+          "4": "{{4.data.status}}"
+        }
+      },
+      "metadata": {
+        "designer": {
+          "x": 1500,
+          "y": 0
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "instant": false,
+    "version": 1,
+    "designer": {
+      "orphans": []
+    },
+    "scenario": {
+      "dlq": false,
+      "slots": null,
+      "dataloss": false,
+      "maxErrors": 3,
+      "autoCommit": true,
+      "roundtrips": 1,
+      "sequential": false,
+      "confidential": false,
+      "freshVariables": false,
+      "autoCommitTriggerLast": true
+    }
+  }
+}

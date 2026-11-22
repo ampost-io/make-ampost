@@ -1,0 +1,16 @@
+{
+	"baseUrl": "https://api.ampost.io",
+	"headers": {
+		"authorization": "Bearer {{connection.apiKey}}"
+	},
+	"response": {
+		"error": {
+			"message": "[{{statusCode}}] {{ifempty(body.error.message, 'Ampost API error')}}{{if(body.error.code, ' (' + body.error.code + ')', '')}}"
+		}
+	},
+	"log": {
+		"sanitize": [
+			"request.headers.authorization"
+		]
+	}
+}

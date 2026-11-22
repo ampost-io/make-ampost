@@ -1,0 +1,84 @@
+[
+	{
+		"name": "postId",
+		"type": "text",
+		"label": "Post ID",
+		"help": "Only this post."
+	},
+	{
+		"name": "platform",
+		"type": "select",
+		"label": "Platform",
+		"options": [
+			{
+				"label": "Instagram",
+				"value": "instagram"
+			},
+			{
+				"label": "Facebook",
+				"value": "facebook"
+			},
+			{
+				"label": "LinkedIn",
+				"value": "linkedin"
+			},
+			{
+				"label": "TikTok",
+				"value": "tiktok"
+			},
+			{
+				"label": "Threads",
+				"value": "threads"
+			},
+			{
+				"label": "X (Twitter)",
+				"value": "twitter"
+			},
+			{
+				"label": "Discord",
+				"value": "discord"
+			},
+			{
+				"label": "Telegram",
+				"value": "telegram"
+			},
+			{
+				"label": "Bluesky",
+				"value": "bluesky"
+			},
+			{
+				"label": "YouTube",
+				"value": "youtube"
+			},
+			{
+				"label": "Pinterest",
+				"value": "pinterest"
+			}
+		],
+		"help": "Only this platform."
+	},
+	{
+		"name": "platformSetId",
+		"type": "select",
+		"label": "Platform set",
+		"options": "rpc://listPlatformSetOptions",
+		"mode": "edit",
+		"help": "Only posts to this platform set."
+	},
+	{
+		"name": "accountId",
+		"type": "select",
+		"label": "Account",
+		"options": "rpc://listAccountOptions",
+		"mode": "edit",
+		"help": "Only this connected account."
+	},
+	{
+		"name": "limit",
+		"type": "uinteger",
+		"label": "Limit",
+		"default": 10,
+		"required": true,
+		"help": "Maximum number of results to work with during one execution cycle."
+	}
+]

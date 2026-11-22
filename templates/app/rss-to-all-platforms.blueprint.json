@@ -1,0 +1,74 @@
+{
+  "name": "RSS feed to all platforms (Ampost app)",
+  "flow": [
+    {
+      "id": 1,
+      "module": "rss:TriggerNewArticle",
+      "version": 4,
+      "parameters": {
+        "url": "https://example.com/feed.xml",
+        "maxResults": 1,
+        "include": []
+      },
+      "mapper": {},
+      "metadata": {
+        "designer": {
+          "x": 0,
+          "y": 0
+        }
+      }
+    },
+    {
+      "id": 2,
+      "module": "ampost:createPost",
+      "version": 1,
+      "parameters": {
+        "__IMTCONN__": null
+      },
+      "mapper": {
+        "targets": [
+          {
+            "platforms": [
+              "linkedin",
+              "facebook",
+              "threads",
+              "twitter",
+              "bluesky",
+              "telegram",
+              "discord"
+            ]
+          }
+        ],
+        "text": "{{1.title}}",
+        "linkUrl": "{{1.url}}",
+        "when": "now",
+        "Idempotency-Key": "rss-{{md5(1.url)}}"
+      },
+      "metadata": {
+        "designer": {
+          "x": 600,
+          "y": 0
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "instant": false,
+    "version": 1,
+    "designer": {
+      "orphans": []
+    },
+    "scenario": {
+      "dlq": false,
+      "slots": null,
+      "dataloss": false,
+      "maxErrors": 3,
+      "autoCommit": true,
+      "roundtrips": 1,
+      "sequential": false,
+      "confidential": false,
+      "freshVariables": false,
+      "autoCommitTriggerLast": true
+    }
+  }
+}

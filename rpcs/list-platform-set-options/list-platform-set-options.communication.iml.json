@@ -1,0 +1,20 @@
+{
+	"url": "/api/platform-sets",
+	"method": "GET",
+	"qs": {
+		"limit": 100
+	},
+	"response": {
+		"iterate": "{{body.data}}",
+		"output": {
+			"label": "{{item.name}}{{if(item.isDefault, ' (default)', '')}}",
+			"value": "{{item.id}}"
+		}
+	},
+	"pagination": {
+		"qs": {
+			"offset": "{{(pagination.page - 1) * 100}}"
+		},
+		"condition": "{{body.pagination.hasMore}}"
+	}
+}

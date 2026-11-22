@@ -1,0 +1,42 @@
+{
+	"from": "2026-10-22",
+	"to": "2026-11-20",
+	"totals": {
+		"posts": 14,
+		"followers": 5230,
+		"followersChange": 112,
+		"metrics": {
+			"views": 1520,
+			"reach": 1210,
+			"likes": 87,
+			"comments": 9,
+			"shares": 4,
+			"saves": 12,
+			"quotes": null
+		}
+	},
+	"accounts": [
+		{
+			"accountId": "5d6e7f80-9a1b-4c2d-8e3f-4a5b6c7d8e9f",
+			"platform": "instagram",
+			"platformSetId": "8a1b2c3d-4e5f-4a6b-8c7d-9e0f1a2b3c4d",
+			"username": "ampost.io",
+			"posts": 14,
+			"followers": 5230,
+			"followersChange": 112,
+			"metrics": {
+				"views": 1520,
+				"reach": 1210,
+				"likes": 87,
+				"comments": 9,
+				"shares": 4,
+				"saves": 12,
+				"quotes": null
+			},
+			"syncState": "up_to_date",
+			"syncedAt": "2026-11-21T03:00:00.000Z",
+			"nextSyncAt": "2026-11-22T03:00:00.000Z"
+		}
+	],
+	"unavailableAccounts": []
+}

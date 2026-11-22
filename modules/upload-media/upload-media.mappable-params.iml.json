@@ -1,0 +1,17 @@
+[
+	{
+		"name": "fileName",
+		"type": "filename",
+		"label": "File name",
+		"semantic": "file:name",
+		"required": true,
+		"help": "With its extension, for example `launch.mp4`: the extension sets the file type."
+	},
+	{
+		"name": "data",
+		"type": "buffer",
+		"label": "Data",
+		"semantic": "file:data",
+		"required": true
+	}
+]

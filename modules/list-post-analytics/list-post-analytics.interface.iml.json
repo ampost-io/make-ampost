@@ -1,0 +1,116 @@
+[
+	{
+		"name": "postId",
+		"type": "text",
+		"label": "Post ID"
+	},
+	{
+		"name": "status",
+		"type": "text",
+		"label": "Status"
+	},
+	{
+		"name": "text",
+		"type": "text",
+		"label": "Text"
+	},
+	{
+		"name": "createdAt",
+		"type": "date",
+		"label": "Created at"
+	},
+	{
+		"name": "platformPosts",
+		"type": "array",
+		"label": "Platform posts",
+		"spec": [
+			{
+				"name": "platform",
+				"type": "text",
+				"label": "Platform"
+			},
+			{
+				"name": "accountId",
+				"type": "text",
+				"label": "Account ID"
+			},
+			{
+				"name": "platformSetId",
+				"type": "text",
+				"label": "Platform set ID"
+			},
+			{
+				"name": "platformPostId",
+				"type": "text",
+				"label": "Platform post ID"
+			},
+			{
+				"name": "publishedUrl",
+				"type": "url",
+				"label": "Published URL"
+			},
+			{
+				"name": "publishedAt",
+				"type": "date",
+				"label": "Published at"
+			},
+			{
+				"name": "contentType",
+				"type": "text",
+				"label": "Content type"
+			},
+			{
+				"name": "analyticsStatus",
+				"type": "text",
+				"label": "Analytics status"
+			},
+			{
+				"name": "metrics",
+				"type": "collection",
+				"label": "Metrics",
+				"spec": [
+					{
+						"name": "views",
+						"type": "number",
+						"label": "Views"
+					},
+					{
+						"name": "reach",
+						"type": "number",
+						"label": "Reach"
+					},
+					{
+						"name": "likes",
+						"type": "number",
+						"label": "Likes"
+					},
+					{
+						"name": "comments",
+						"type": "number",
+						"label": "Comments"
+					},
+					{
+						"name": "shares",
+						"type": "number",
+						"label": "Shares"
+					},
+					{
+						"name": "saves",
+						"type": "number",
+						"label": "Saves"
+					},
+					{
+						"name": "quotes",
+						"type": "number",
+						"label": "Quotes"
+					}
+				]
+			},
+			{
+				"name": "syncedAt",
+				"type": "date",
+				"label": "Synced at"
+			}
+		]
+	}
+]

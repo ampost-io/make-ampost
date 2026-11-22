@@ -1,0 +1,59 @@
+[
+	{
+		"name": "events",
+		"type": "select",
+		"label": "Events",
+		"multiple": true,
+		"required": true,
+		"default": [
+			"post.published",
+			"post.partial",
+			"post.failed"
+		],
+		"validate": {
+			"minItems": 1
+		},
+		"options": [
+			{
+				"label": "Post scheduled",
+				"value": "post.scheduled"
+			},
+			{
+				"label": "Post unscheduled (back to draft)",
+				"value": "post.unscheduled"
+			},
+			{
+				"label": "Post discarded",
+				"value": "post.discarded"
+			},
+			{
+				"label": "Post published on every platform",
+				"value": "post.published"
+			},
+			{
+				"label": "Post published on some platforms",
+				"value": "post.partial"
+			},
+			{
+				"label": "Post failed on every platform",
+				"value": "post.failed"
+			},
+			{
+				"label": "Published on one platform",
+				"value": "post.platform.published"
+			},
+			{
+				"label": "Failed on one platform",
+				"value": "post.platform.failed"
+			},
+			{
+				"label": "Deleted on one platform",
+				"value": "post.platform.deleted"
+			},
+			{
+				"label": "Edited on one platform",
+				"value": "post.platform.edited"
+			}
+		]
+	}
+]

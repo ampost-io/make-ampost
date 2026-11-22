@@ -1,0 +1,4 @@
+{
+	"url": "/api/webhooks/endpoints/{{encodeURL(webhook.externalHookId)}}",
+	"method": "DELETE"
+}

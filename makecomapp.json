@@ -1,0 +1,349 @@
+{
+	"fileVersion": 1,
+	"generalCodeFiles": {
+		"base": "general/base.iml.json",
+		"common": null,
+		"groups": "modules/groups.json",
+		"readme": "general/readme.md"
+	},
+	"components": {
+		"connection": {
+			"ampost": {
+				"label": "Ampost",
+				"connectionType": "basic",
+				"codeFiles": {
+					"communication": "connections/ampost/ampost.communication.iml.json",
+					"params": "connections/ampost/ampost.params.iml.json",
+					"common": null
+				}
+			}
+		},
+		"webhook": {
+			"postEvents": {
+				"label": "Ampost post events",
+				"webhookType": "web",
+				"connection": "ampost",
+				"altConnection": null,
+				"codeFiles": {
+					"communication": "webhooks/post-events/post-events.communication.iml.json",
+					"params": "webhooks/post-events/post-events.params.iml.json",
+					"attach": "webhooks/post-events/post-events.attach.iml.json",
+					"detach": "webhooks/post-events/post-events.detach.iml.json",
+					"update": null,
+					"requiredScope": null
+				}
+			},
+			"accountEvents": {
+				"label": "Ampost account events",
+				"webhookType": "web",
+				"connection": "ampost",
+				"altConnection": null,
+				"codeFiles": {
+					"communication": "webhooks/account-events/account-events.communication.iml.json",
+					"params": "webhooks/account-events/account-events.params.iml.json",
+					"attach": "webhooks/account-events/account-events.attach.iml.json",
+					"detach": "webhooks/account-events/account-events.detach.iml.json",
+					"update": null,
+					"requiredScope": null
+				}
+			}
+		},
+		"module": {
+			"createPost": {
+				"label": "Create a post",
+				"description": "Creates a post: a draft, published now, scheduled or queued.",
+				"moduleType": "action",
+				"actionCrud": "create",
+				"connection": "ampost",
+				"altConnection": null,
+				"codeFiles": {
+					"communication": "modules/create-post/create-post.communication.iml.json",
+					"staticParams": "modules/create-post/create-post.static-params.iml.json",
+					"mappableParams": "modules/create-post/create-post.mappable-params.iml.json",
+					"interface": "modules/create-post/create-post.interface.iml.json",
+					"samples": "modules/create-post/create-post.samples.iml.json",
+					"scope": null
+				}
+			},
+			"validatePost": {
+				"label": "Validate a post",
+				"description": "Checks a post against each platform's rules without creating it.",
+				"moduleType": "action",
+				"actionCrud": "read",
+				"connection": "ampost",
+				"altConnection": null,
+				"codeFiles": {
+					"communication": "modules/validate-post/validate-post.communication.iml.json",
+					"staticParams": "modules/validate-post/validate-post.static-params.iml.json",
+					"mappableParams": "modules/validate-post/validate-post.mappable-params.iml.json",
+					"interface": "modules/validate-post/validate-post.interface.iml.json",
+					"samples": "modules/validate-post/validate-post.samples.iml.json",
+					"scope": null
+				}
+			},
+			"getPost": {
+				"label": "Get a post",
+				"description": "Gets a post with the status of each platform.",
+				"moduleType": "action",
+				"actionCrud": "read",
+				"connection": "ampost",
+				"altConnection": null,
+				"codeFiles": {
+					"communication": "modules/get-post/get-post.communication.iml.json",
+					"staticParams": "modules/get-post/get-post.static-params.iml.json",
+					"mappableParams": "modules/get-post/get-post.mappable-params.iml.json",
+					"interface": "modules/get-post/get-post.interface.iml.json",
+					"samples": "modules/get-post/get-post.samples.iml.json",
+					"scope": null
+				}
+			},
+			"listPosts": {
+				"label": "Search posts",
+				"description": "Lists posts, newest first, with optional filters.",
+				"moduleType": "search",
+				"actionCrud": null,
+				"connection": "ampost",
+				"altConnection": null,
+				"codeFiles": {
+					"communication": "modules/list-posts/list-posts.communication.iml.json",
+					"staticParams": "modules/list-posts/list-posts.static-params.iml.json",
+					"mappableParams": "modules/list-posts/list-posts.mappable-params.iml.json",
+					"interface": "modules/list-posts/list-posts.interface.iml.json",
+					"samples": "modules/list-posts/list-posts.samples.iml.json",
+					"scope": null
+				}
+			},
+			"publishPost": {
+				"label": "Publish a post now",
+				"description": "Publishes a draft or scheduled post right away.",
+				"moduleType": "action",
+				"actionCrud": "update",
+				"connection": "ampost",
+				"altConnection": null,
+				"codeFiles": {
+					"communication": "modules/publish-post/publish-post.communication.iml.json",
+					"staticParams": "modules/publish-post/publish-post.static-params.iml.json",
+					"mappableParams": "modules/publish-post/publish-post.mappable-params.iml.json",
+					"interface": "modules/publish-post/publish-post.interface.iml.json",
+					"samples": "modules/publish-post/publish-post.samples.iml.json",
+					"scope": null
+				}
+			},
+			"retryPost": {
+				"label": "Retry a failed post",
+				"description": "Publishes the failed platforms of a post again.",
+				"moduleType": "action",
+				"actionCrud": "update",
+				"connection": "ampost",
+				"altConnection": null,
+				"codeFiles": {
+					"communication": "modules/retry-post/retry-post.communication.iml.json",
+					"staticParams": "modules/retry-post/retry-post.static-params.iml.json",
+					"mappableParams": "modules/retry-post/retry-post.mappable-params.iml.json",
+					"interface": "modules/retry-post/retry-post.interface.iml.json",
+					"samples": "modules/retry-post/retry-post.samples.iml.json",
+					"scope": null
+				}
+			},
+			"deletePost": {
+				"label": "Delete a post",
+				"description": "Discards a post that is not published yet. It stays readable with the status discarded.",
+				"moduleType": "action",
+				"actionCrud": "delete",
+				"connection": "ampost",
+				"altConnection": null,
+				"codeFiles": {
+					"communication": "modules/delete-post/delete-post.communication.iml.json",
+					"staticParams": "modules/delete-post/delete-post.static-params.iml.json",
+					"mappableParams": "modules/delete-post/delete-post.mappable-params.iml.json",
+					"interface": "modules/delete-post/delete-post.interface.iml.json",
+					"samples": "modules/delete-post/delete-post.samples.iml.json",
+					"scope": null
+				}
+			},
+			"uploadMedia": {
+				"label": "Upload a media file",
+				"description": "Uploads an image or video file and returns its public URL for Create a post.",
+				"moduleType": "action",
+				"actionCrud": "create",
+				"connection": "ampost",
+				"altConnection": null,
+				"codeFiles": {
+					"communication": "modules/upload-media/upload-media.communication.iml.json",
+					"staticParams": "modules/upload-media/upload-media.static-params.iml.json",
+					"mappableParams": "modules/upload-media/upload-media.mappable-params.iml.json",
+					"interface": "modules/upload-media/upload-media.interface.iml.json",
+					"samples": "modules/upload-media/upload-media.samples.iml.json",
+					"scope": null
+				}
+			},
+			"listAccounts": {
+				"label": "List accounts",
+				"description": "Lists your connected social accounts.",
+				"moduleType": "search",
+				"actionCrud": null,
+				"connection": "ampost",
+				"altConnection": null,
+				"codeFiles": {
+					"communication": "modules/list-accounts/list-accounts.communication.iml.json",
+					"staticParams": "modules/list-accounts/list-accounts.static-params.iml.json",
+					"mappableParams": "modules/list-accounts/list-accounts.mappable-params.iml.json",
+					"interface": "modules/list-accounts/list-accounts.interface.iml.json",
+					"samples": "modules/list-accounts/list-accounts.samples.iml.json",
+					"scope": null
+				}
+			},
+			"listPlatformSets": {
+				"label": "List platform sets",
+				"description": "Lists your platform sets (groups of accounts, one per platform), the default set first.",
+				"moduleType": "search",
+				"actionCrud": null,
+				"connection": "ampost",
+				"altConnection": null,
+				"codeFiles": {
+					"communication": "modules/list-platform-sets/list-platform-sets.communication.iml.json",
+					"staticParams": "modules/list-platform-sets/list-platform-sets.static-params.iml.json",
+					"mappableParams": "modules/list-platform-sets/list-platform-sets.mappable-params.iml.json",
+					"interface": "modules/list-platform-sets/list-platform-sets.interface.iml.json",
+					"samples": "modules/list-platform-sets/list-platform-sets.samples.iml.json",
+					"scope": null
+				}
+			},
+			"getQueueSlots": {
+				"label": "List queue slots",
+				"description": "Lists the next slots of a platform set's posting queue.",
+				"moduleType": "search",
+				"actionCrud": null,
+				"connection": "ampost",
+				"altConnection": null,
+				"codeFiles": {
+					"communication": "modules/get-queue-slots/get-queue-slots.communication.iml.json",
+					"staticParams": "modules/get-queue-slots/get-queue-slots.static-params.iml.json",
+					"mappableParams": "modules/get-queue-slots/get-queue-slots.mappable-params.iml.json",
+					"interface": "modules/get-queue-slots/get-queue-slots.interface.iml.json",
+					"samples": "modules/get-queue-slots/get-queue-slots.samples.iml.json",
+					"scope": null
+				}
+			},
+			"listPostAnalytics": {
+				"label": "List post analytics",
+				"description": "Lists posts with views, likes, comments and other metrics per platform.",
+				"moduleType": "search",
+				"actionCrud": null,
+				"connection": "ampost",
+				"altConnection": null,
+				"codeFiles": {
+					"communication": "modules/list-post-analytics/list-post-analytics.communication.iml.json",
+					"staticParams": "modules/list-post-analytics/list-post-analytics.static-params.iml.json",
+					"mappableParams": "modules/list-post-analytics/list-post-analytics.mappable-params.iml.json",
+					"interface": "modules/list-post-analytics/list-post-analytics.interface.iml.json",
+					"samples": "modules/list-post-analytics/list-post-analytics.samples.iml.json",
+					"scope": null
+				}
+			},
+			"getAnalyticsOverview": {
+				"label": "Get an analytics overview",
+				"description": "Gets post counts, followers and metrics for a date range, per account and in total.",
+				"moduleType": "action",
+				"actionCrud": "read",
+				"connection": "ampost",
+				"altConnection": null,
+				"codeFiles": {
+					"communication": "modules/get-analytics-overview/get-analytics-overview.communication.iml.json",
+					"staticParams": "modules/get-analytics-overview/get-analytics-overview.static-params.iml.json",
+					"mappableParams": "modules/get-analytics-overview/get-analytics-overview.mappable-params.iml.json",
+					"interface": "modules/get-analytics-overview/get-analytics-overview.interface.iml.json",
+					"samples": "modules/get-analytics-overview/get-analytics-overview.samples.iml.json",
+					"scope": null
+				}
+			},
+			"listFollowers": {
+				"label": "List follower counts",
+				"description": "Lists each account's followers with daily history.",
+				"moduleType": "search",
+				"actionCrud": null,
+				"connection": "ampost",
+				"altConnection": null,
+				"codeFiles": {
+					"communication": "modules/list-followers/list-followers.communication.iml.json",
+					"staticParams": "modules/list-followers/list-followers.static-params.iml.json",
+					"mappableParams": "modules/list-followers/list-followers.mappable-params.iml.json",
+					"interface": "modules/list-followers/list-followers.interface.iml.json",
+					"samples": "modules/list-followers/list-followers.samples.iml.json",
+					"scope": null
+				}
+			},
+			"watchPostEvents": {
+				"label": "Watch post events",
+				"description": "Triggers when a post is scheduled, published, fails and more.",
+				"moduleType": "instant_trigger",
+				"actionCrud": null,
+				"connection": "ampost",
+				"altConnection": null,
+				"webhook": "postEvents",
+				"codeFiles": {
+					"communication": "modules/watch-post-events/watch-post-events.communication.iml.json",
+					"staticParams": "modules/watch-post-events/watch-post-events.static-params.iml.json",
+					"mappableParams": "modules/watch-post-events/watch-post-events.mappable-params.iml.json",
+					"interface": "modules/watch-post-events/watch-post-events.interface.iml.json",
+					"samples": "modules/watch-post-events/watch-post-events.samples.iml.json"
+				}
+			},
+			"watchAccountEvents": {
+				"label": "Watch account events",
+				"description": "Triggers when a social account is connected, disconnected or needs to be reconnected.",
+				"moduleType": "instant_trigger",
+				"actionCrud": null,
+				"connection": "ampost",
+				"altConnection": null,
+				"webhook": "accountEvents",
+				"codeFiles": {
+					"communication": "modules/watch-account-events/watch-account-events.communication.iml.json",
+					"staticParams": "modules/watch-account-events/watch-account-events.static-params.iml.json",
+					"mappableParams": "modules/watch-account-events/watch-account-events.mappable-params.iml.json",
+					"interface": "modules/watch-account-events/watch-account-events.interface.iml.json",
+					"samples": "modules/watch-account-events/watch-account-events.samples.iml.json"
+				}
+			},
+			"makeApiCall": {
+				"label": "Make an API call",
+				"description": "Performs an arbitrary authorized API call.",
+				"moduleType": "universal",
+				"actionCrud": null,
+				"connection": "ampost",
+				"altConnection": null,
+				"codeFiles": {
+					"communication": "modules/make-api-call/make-api-call.communication.iml.json",
+					"staticParams": "modules/make-api-call/make-api-call.static-params.iml.json",
+					"mappableParams": "modules/make-api-call/make-api-call.mappable-params.iml.json",
+					"interface": "modules/make-api-call/make-api-call.interface.iml.json",
+					"samples": "modules/make-api-call/make-api-call.samples.iml.json",
+					"scope": null
+				}
+			}
+		},
+		"rpc": {
+			"listPlatformSetOptions": {
+				"label": "List platform sets",
+				"connection": "ampost",
+				"altConnection": null,
+				"codeFiles": {
+					"communication": "rpcs/list-platform-set-options/list-platform-set-options.communication.iml.json",
+					"params": "rpcs/list-platform-set-options/list-platform-set-options.params.iml.json"
+				}
+			},
+			"listAccountOptions": {
+				"label": "List accounts",
+				"connection": "ampost",
+				"altConnection": null,
+				"codeFiles": {
+					"communication": "rpcs/list-account-options/list-account-options.communication.iml.json",
+					"params": "rpcs/list-account-options/list-account-options.params.iml.json"
+				}
+			}
+		},
+		"function": {},
+		"endpoint": {}
+	},
+	"origins": []
+}

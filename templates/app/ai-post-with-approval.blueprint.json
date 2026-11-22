@@ -1,0 +1,150 @@
+{
+  "name": "AI-written post with approval (1 of 2: write and ask) (Ampost app)",
+  "flow": [
+    {
+      "id": 1,
+      "module": "gateway:CustomWebHook",
+      "version": 1,
+      "parameters": {
+        "hook": null,
+        "maxResults": 1
+      },
+      "mapper": {},
+      "metadata": {
+        "designer": {
+          "x": 0,
+          "y": 0
+        }
+      }
+    },
+    {
+      "id": 2,
+      "module": "openai-gpt-3:CreateCompletion",
+      "version": 1,
+      "parameters": {
+        "__IMTCONN__": null
+      },
+      "mapper": {
+        "select": "chat",
+        "model": "gpt-4o-mini",
+        "messages": [
+          {
+            "role": "system",
+            "content": "You write short social media posts for our brand. Plain text, at most 280 characters, no hashtags unless asked, no quotes around the post."
+          },
+          {
+            "role": "user",
+            "content": "Write a post about: {{1.topic}}"
+          }
+        ],
+        "max_tokens": "300",
+        "temperature": "0.7",
+        "n_completions": "1",
+        "response_format": "text"
+      },
+      "metadata": {
+        "designer": {
+          "x": 600,
+          "y": 0
+        }
+      }
+    },
+    {
+      "id": 3,
+      "module": "ampost:createPost",
+      "version": 1,
+      "parameters": {
+        "__IMTCONN__": null
+      },
+      "mapper": {
+        "targets": [
+          {
+            "platforms": [
+              "linkedin",
+              "facebook",
+              "threads",
+              "twitter",
+              "bluesky",
+              "telegram",
+              "discord"
+            ]
+          }
+        ],
+        "text": "{{2.result}}",
+        "when": "draft",
+        "Idempotency-Key": "ai-{{md5(2.result)}}"
+      },
+      "metadata": {
+        "designer": {
+          "x": 900,
+          "y": 0
+        }
+      }
+    },
+    {
+      "id": 4,
+      "module": "google-email:ActionSendEmail",
+      "version": 2,
+      "parameters": {
+        "__IMTCONN__": null
+      },
+      "mapper": {
+        "to": [
+          "you@example.com"
+        ],
+        "subject": "Approve this post?",
+        "html": "<p>The AI wrote this draft:</p><blockquote>{{escapeHTML(2.result)}}</blockquote><p><a href=\"YOUR_APPROVAL_WEBHOOK_URL?postId={{3.id}}&token=YOUR_APPROVAL_TOKEN\">Approve and publish now</a></p><p>Or edit or delete the draft in Ampost: https://ampost.io/app</p>",
+        "cc": [],
+        "bcc": [],
+        "attachments": []
+      },
+      "metadata": {
+        "designer": {
+          "x": 1200,
+          "y": 0
+        }
+      }
+    },
+    {
+      "id": 5,
+      "module": "gateway:WebhookRespond",
+      "version": 1,
+      "parameters": {},
+      "mapper": {
+        "body": "{\"postId\": \"{{3.id}}\", \"status\": \"{{3.status}}\"}",
+        "status": "200",
+        "headers": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ]
+      },
+      "metadata": {
+        "designer": {
+          "x": 1500,
+          "y": 0
+        }
+      }
+    }
+  ],
+  "metadata": {
+    "instant": true,
+    "version": 1,
+    "designer": {
+      "orphans": []
+    },
+    "scenario": {
+      "dlq": false,
+      "slots": null,
+      "dataloss": false,
+      "maxErrors": 3,
+      "autoCommit": true,
+      "roundtrips": 1,
+      "sequential": false,
+      "confidential": false,
+      "freshVariables": false,
+      "autoCommitTriggerLast": true
+    }
+  }
+}

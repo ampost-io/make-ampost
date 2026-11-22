@@ -1,0 +1,7 @@
+{
+	"url": "/api/posts/{{encodeURL(parameters.postId)}}",
+	"method": "DELETE",
+	"response": {
+		"output": "{{body}}"
+	}
+}

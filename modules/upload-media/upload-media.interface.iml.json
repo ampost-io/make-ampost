@@ -1,0 +1,47 @@
+[
+	{
+		"name": "url",
+		"type": "url",
+		"label": "URL"
+	},
+	{
+		"name": "type",
+		"type": "text",
+		"label": "Type"
+	},
+	{
+		"name": "mimeType",
+		"type": "text",
+		"label": "MIME type"
+	},
+	{
+		"name": "sizeBytes",
+		"type": "uinteger",
+		"label": "Size (bytes)"
+	},
+	{
+		"name": "width",
+		"type": "uinteger",
+		"label": "Width"
+	},
+	{
+		"name": "height",
+		"type": "uinteger",
+		"label": "Height"
+	},
+	{
+		"name": "durationSeconds",
+		"type": "number",
+		"label": "Duration (seconds)"
+	},
+	{
+		"name": "uploadId",
+		"type": "text",
+		"label": "Upload ID"
+	},
+	{
+		"name": "status",
+		"type": "text",
+		"label": "Status"
+	}
+]

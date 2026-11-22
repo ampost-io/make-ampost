@@ -1,0 +1,119 @@
+[
+	{
+		"name": "status",
+		"type": "select",
+		"label": "Status",
+		"options": [
+			{
+				"label": "Draft",
+				"value": "draft"
+			},
+			{
+				"label": "Scheduled",
+				"value": "scheduled"
+			},
+			{
+				"label": "Queued",
+				"value": "queued"
+			},
+			{
+				"label": "Posting",
+				"value": "posting"
+			},
+			{
+				"label": "Published",
+				"value": "published"
+			},
+			{
+				"label": "Partial",
+				"value": "partial"
+			},
+			{
+				"label": "Failed",
+				"value": "failed"
+			},
+			{
+				"label": "Discarded",
+				"value": "discarded"
+			},
+			{
+				"label": "Deleted",
+				"value": "deleted"
+			}
+		]
+	},
+	{
+		"name": "platform",
+		"type": "select",
+		"label": "Platform",
+		"options": [
+			{
+				"label": "Instagram",
+				"value": "instagram"
+			},
+			{
+				"label": "Facebook",
+				"value": "facebook"
+			},
+			{
+				"label": "LinkedIn",
+				"value": "linkedin"
+			},
+			{
+				"label": "TikTok",
+				"value": "tiktok"
+			},
+			{
+				"label": "Threads",
+				"value": "threads"
+			},
+			{
+				"label": "X (Twitter)",
+				"value": "twitter"
+			},
+			{
+				"label": "Discord",
+				"value": "discord"
+			},
+			{
+				"label": "Telegram",
+				"value": "telegram"
+			},
+			{
+				"label": "Bluesky",
+				"value": "bluesky"
+			},
+			{
+				"label": "YouTube",
+				"value": "youtube"
+			},
+			{
+				"label": "Pinterest",
+				"value": "pinterest"
+			}
+		],
+		"help": "Only this platform."
+	},
+	{
+		"name": "platformSetId",
+		"type": "select",
+		"label": "Platform set",
+		"options": "rpc://listPlatformSetOptions",
+		"mode": "edit",
+		"help": "Only posts to this platform set."
+	},
+	{
+		"name": "search",
+		"type": "text",
+		"label": "Search",
+		"help": "Only posts whose text contains this."
+	},
+	{
+		"name": "limit",
+		"type": "uinteger",
+		"label": "Limit",
+		"default": 10,
+		"required": true,
+		"help": "Maximum number of results to work with during one execution cycle."
+	}
+]

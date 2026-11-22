@@ -1,0 +1,114 @@
+[
+	{
+		"name": "id",
+		"type": "text",
+		"label": "Account ID"
+	},
+	{
+		"name": "platform",
+		"type": "text",
+		"label": "Platform"
+	},
+	{
+		"name": "platformSetId",
+		"type": "text",
+		"label": "Platform set ID"
+	},
+	{
+		"name": "platformAccountId",
+		"type": "text",
+		"label": "Platform account ID"
+	},
+	{
+		"name": "username",
+		"type": "text",
+		"label": "Username"
+	},
+	{
+		"name": "avatarUrl",
+		"type": "url",
+		"label": "Avatar URL"
+	},
+	{
+		"name": "status",
+		"type": "text",
+		"label": "Status"
+	},
+	{
+		"name": "scopes",
+		"type": "array",
+		"label": "Scopes",
+		"spec": {
+			"type": "text"
+		}
+	},
+	{
+		"name": "tokenHealth",
+		"type": "text",
+		"label": "Token health"
+	},
+	{
+		"name": "tokenExpiresAt",
+		"type": "date",
+		"label": "Token expires at"
+	},
+	{
+		"name": "health",
+		"type": "collection",
+		"label": "Health",
+		"spec": [
+			{
+				"name": "canPost",
+				"type": "boolean",
+				"label": "Can post"
+			},
+			{
+				"name": "needsReconnect",
+				"type": "boolean",
+				"label": "Needs reconnect"
+			}
+		]
+	},
+	{
+		"name": "platformMetadata",
+		"type": "any",
+		"label": "Platform metadata"
+	},
+	{
+		"name": "analytics",
+		"type": "collection",
+		"label": "Analytics",
+		"spec": [
+			{
+				"name": "available",
+				"type": "boolean",
+				"label": "Available"
+			},
+			{
+				"name": "optInRequired",
+				"type": "boolean",
+				"label": "Opt-in required"
+			},
+			{
+				"name": "enabled",
+				"type": "boolean",
+				"label": "Enabled"
+			}
+		]
+	},
+	{
+		"name": "createdAt",
+		"type": "date",
+		"label": "Created at"
+	},
+	{
+		"name": "updatedAt",
+		"type": "date",
+		"label": "Updated at"
+	},
+	{
+		"name": "lastUsedAt",
+		"type": "date",
+		"label": "Last used at"
+	}
+]

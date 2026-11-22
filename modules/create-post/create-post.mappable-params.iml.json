@@ -1,0 +1,248 @@
+[
+	{
+		"name": "targets",
+		"type": "array",
+		"label": "Targets",
+		"required": true,
+		"validate": {
+			"minItems": 1,
+			"maxItems": 10
+		},
+		"help": "Where the post goes: one item per platform set. Each platform needs an active account in that set. Most users have one set and add one item.",
+		"spec": [
+			{
+				"name": "platformSetId",
+				"type": "select",
+				"label": "Platform set",
+				"options": "rpc://listPlatformSetOptions",
+				"mode": "edit",
+				"help": "Leave empty for your default platform set."
+			},
+			{
+				"name": "platforms",
+				"type": "select",
+				"label": "Platforms",
+				"multiple": true,
+				"required": true,
+				"validate": {
+					"minItems": 1
+				},
+				"options": [
+					{
+						"label": "Instagram",
+						"value": "instagram"
+					},
+					{
+						"label": "Facebook",
+						"value": "facebook"
+					},
+					{
+						"label": "LinkedIn",
+						"value": "linkedin"
+					},
+					{
+						"label": "TikTok",
+						"value": "tiktok"
+					},
+					{
+						"label": "Threads",
+						"value": "threads"
+					},
+					{
+						"label": "X (Twitter)",
+						"value": "twitter"
+					},
+					{
+						"label": "Discord",
+						"value": "discord"
+					},
+					{
+						"label": "Telegram",
+						"value": "telegram"
+					},
+					{
+						"label": "Bluesky",
+						"value": "bluesky"
+					},
+					{
+						"label": "YouTube",
+						"value": "youtube"
+					},
+					{
+						"label": "Pinterest",
+						"value": "pinterest"
+					}
+				]
+			}
+		]
+	},
+	{
+		"name": "text",
+		"type": "text",
+		"label": "Text",
+		"multiline": true,
+		"help": "The post text. Each platform's length limit applies; **Validate a post** checks it."
+	},
+	{
+		"name": "linkUrl",
+		"type": "url",
+		"label": "Link URL",
+		"help": "A link to attach. Platforms that take no link card ignore it."
+	},
+	{
+		"name": "media",
+		"type": "array",
+		"label": "Media",
+		"validate": {
+			"maxItems": 35
+		},
+		"help": "Images and videos at public https URLs, in order. To post a file from your scenario, upload it with **Upload a media file** first and map its URL here.",
+		"spec": [
+			{
+				"name": "url",
+				"type": "url",
+				"label": "URL",
+				"required": true
+			},
+			{
+				"name": "type",
+				"type": "select",
+				"label": "Type",
+				"required": true,
+				"options": [
+					{
+						"label": "Image",
+						"value": "image"
+					},
+					{
+						"label": "Video",
+						"value": "video"
+					}
+				]
+			},
+			{
+				"name": "altText",
+				"type": "text",
+				"label": "Alt text",
+				"help": "Image description for screen readers, on platforms that take it."
+			}
+		]
+	},
+	{
+		"name": "when",
+		"type": "select",
+		"label": "When to publish",
+		"required": true,
+		"default": "draft",
+		"options": [
+			{
+				"label": "Save as a draft",
+				"value": "draft"
+			},
+			{
+				"label": "Publish now",
+				"value": "now"
+			},
+			{
+				"label": "Schedule",
+				"value": "schedule",
+				"nested": [
+					{
+						"name": "scheduledFor",
+						"type": "date",
+						"label": "Publish at",
+						"required": true,
+						"help": "A time in the future."
+					}
+				]
+			},
+			{
+				"label": "Next free queue slot",
+				"value": "queue"
+			}
+		],
+		"help": "**Next free queue slot** needs exactly one target and a queue set up for its platform set in Ampost."
+	},
+	{
+		"name": "firstComment",
+		"type": "text",
+		"label": "First comment",
+		"advanced": true,
+		"help": "A comment Ampost posts right after the post (on X, Threads and Bluesky a reply). Every target platform must support it."
+	},
+	{
+		"name": "thread",
+		"type": "array",
+		"label": "Thread",
+		"advanced": true,
+		"validate": {
+			"maxItems": 25
+		},
+		"help": "Follow-up posts, each a reply to the one before (X, Bluesky, Threads).",
+		"spec": [
+			{
+				"name": "text",
+				"type": "text",
+				"label": "Text",
+				"required": true
+			}
+		]
+	},
+	{
+		"name": "mediaFit",
+		"type": "select",
+		"label": "Media fit",
+		"advanced": true,
+		"options": [
+			{
+				"label": "Pad to the platform's aspect ratio (default)",
+				"value": "pad"
+			},
+			{
+				"label": "Crop to the platform's aspect ratio",
+				"value": "crop"
+			},
+			{
+				"label": "None: reject media with the wrong aspect ratio",
+				"value": "none"
+			}
+		]
+	},
+	{
+		"name": "options",
+		"type": "text",
+		"label": "Platform options (JSON)",
+		"advanced": true,
+		"help": "Per-platform settings as a JSON object, for example `{\"youtube\": {\"title\": \"My video\", \"privacy\": \"public\"}}`. The fields are listed at https://ampost.io/docs."
+	},
+	{
+		"name": "metadata",
+		"type": "array",
+		"label": "Metadata",
+		"advanced": true,
+		"help": "Your own key-value pairs (at most 4 KB), such as an ID from your sheet. Returned on the post and in webhook events.",
+		"spec": [
+			{
+				"name": "key",
+				"type": "text",
+				"label": "Key",
+				"required": true
+			},
+			{
+				"name": "value",
+				"type": "text",
+				"label": "Value"
+			}
+		]
+	},
+	{
+		"name": "Idempotency-Key",
+		"type": "text",
+		"label": "Idempotency key",
+		"advanced": true,
+		"validate": {
+			"pattern": "^[\\x21-\\x7e]{1,255}$"
+		},
+		"help": "Optional. 1-255 visible ASCII characters, for example a UUID or the ID of the item this post comes from. If Make runs the module again with the same key and the same input within 24 hours, Ampost returns the first result instead of creating a second post."
+	}
+]
