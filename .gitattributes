@@ -1,0 +1,3 @@
+# LF everywhere, also on Windows: the template test compares files byte for byte with what
+# scripts/templates.mjs builds, and Make's tooling reads the JSON as is.
+* text=auto eol=lf

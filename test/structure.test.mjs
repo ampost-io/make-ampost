@@ -2,7 +2,7 @@
 
 import assert from "node:assert/strict";
 import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
-import { join, relative } from "node:path";
+import { join, relative, sep } from "node:path";
 import { describe, it } from "node:test";
 import AjvModule from "ajv";
 import { ROOT, manifest, readJson } from "./lib/app.mjs";
@@ -70,7 +70,7 @@ describe("makecomapp.json references", () => {
       for (const name of readdirSync(dir)) {
         const full = join(dir, name);
         if (statSync(full).isDirectory()) walk(full);
-        else onDisk.push(relative(ROOT, full));
+        else onDisk.push(relative(ROOT, full).split(sep).join("/")); // makecomapp.json uses "/" on every OS
       }
     };
     for (const dir of ["connections", "webhooks", "modules", "rpcs", "functions", "general"]) if (existsSync(join(ROOT, dir))) walk(join(ROOT, dir));
