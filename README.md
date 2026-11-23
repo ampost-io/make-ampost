@@ -121,6 +121,23 @@ npm run build:templates
 - `templates/` is generated: edit `scripts/templates.mjs`, then run `npm run build:templates`.
 - `openapi.json` is the snapshot of the live API document. Refresh it with `npm run export:openapi`.
 
+Things that are easy to get wrong when you edit the app:
+
+- `makecomapp.json` lists all six component keys (`connection`, `webhook`, `module`, `rpc`,
+  `function`, `endpoint`), empty ones included. Each file is at
+  `<type>s/<kebab-name>/<kebab-name>.<code>.iml.json`, for example
+  `modules/create-post/create-post.communication.iml.json`. Keep `origins` empty in commits: the VS
+  Code extension adds your Make app there.
+- In a communication, POST, PUT and PATCH need a `body`, and `headers` and `qs` must be objects. To
+  pass all parameters, use the spread key inside the object, `"{{...}}": "{{omit(parameters, 'id')}}"`,
+  not a whole-expression string.
+- IML evaluates every function argument, `if()` included. `if(x, parseJSON(x), undefined)` fails
+  when `x` is empty; write `parseJSON(ifempty(x, 'null'))`.
+- A module's headers override Base's per header name. The connection's communication does not
+  inherit Base at all.
+- Scenario blueprints separate function arguments with `;` (`{{ifempty(1.text; null)}}`); the app's
+  IML uses `,`.
+
 ## License
 
 MIT, see `LICENSE`. `schemas/` is Make's, under its own license (`schemas/LICENSE.md`).
