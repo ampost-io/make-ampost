@@ -8,7 +8,7 @@ Bluesky, Telegram and Discord.
 - **The app** (`makecomapp.json` and its folders): 17 modules, two pickers and two instant
   triggers, in the local-development layout of Make's
   [VS Code extension](https://marketplace.visualstudio.com/items?itemName=Integromat.apps-sdk).
-- **Templates** (`templates/`): five scenario blueprints, each in two versions. `templates/http/`
+- **Templates** (`templates/`): six scenario blueprints, each in two versions. `templates/http/`
   uses Make's HTTP module and works in any Make account today. `templates/app/` uses this app.
 
 Step-by-step guide: [Post to social media from Make](https://ampost.io/how-to/post-to-social-media-from-make?ref=github).
@@ -71,6 +71,7 @@ editor back into these files, use **Download from Make** on `makecomapp.json`.
 
 | Scenario | File | What it does |
 | -------- | ---- | ------------ |
+| Post from a webhook | `post-to-social-media.blueprint.json` | Publishes the `text` (and optional `link`) a webhook receives to Bluesky and Threads, and answers with the post ID and status. Used by the [how-to](https://ampost.io/how-to/post-to-social-media-from-make?ref=github) |
 | RSS to all platforms | `rss-to-all-platforms.blueprint.json` | Posts each new feed item (title and link) right away |
 | Google Sheets schedule | `google-sheets-schedule.blueprint.json` | Schedules one post per new row, writes the post ID and status back |
 | AI-written post with approval | `ai-post-with-approval.blueprint.json` and `ai-post-approve.blueprint.json` | OpenAI writes a draft and Gmail emails an approval link. The second scenario publishes the draft when you click the link |
@@ -84,8 +85,8 @@ pick the file. Then:
 2. Replace the placeholders in capitals. `YOUR_AMPOST_API_KEY` is only in the HTTP versions: paste
    your key after `Bearer `, or better, keep it in a
    Make keychain and use the HTTP module's "API key" authentication. Fill in your feed URL, spreadsheet, channel and email address.
-3. The posts go to LinkedIn, Facebook, Threads, X, Bluesky, Telegram and Discord. Remove the
-   platforms you have not connected: in the HTTP version from `"platforms"` in the request body, in
+3. The posts go to LinkedIn, Facebook, Threads, X, Bluesky, Telegram and Discord (the webhook
+   scenario: Bluesky and Threads). Remove the platforms you have not connected, or add yours: in the HTTP version from `"platforms"` in the request body, in
    the app version from the Platforms field. Instagram, TikTok, YouTube and Pinterest need an
    image or a video.
 4. Click **Run once** to test, then turn the scenario on.

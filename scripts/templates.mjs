@@ -91,8 +91,8 @@ const scenarioMetadata = (instant) => ({
 });
 
 /** The JSON body of POST /api/posts, with text (and link) mapped from Transform to JSON modules. */
-const postBody = ({ text, linkUrl, extra = "" }) =>
-  `{"targets": [{"platforms": ${JSON.stringify(TEXT_PLATFORMS)}}], "text": ${text}` + (linkUrl ? `, "linkUrl": ${linkUrl}` : "") + extra + "}";
+const postBody = ({ text, linkUrl, extra = "", platforms = TEXT_PLATFORMS }) =>
+  `{"targets": [{"platforms": ${JSON.stringify(platforms)}}], "text": ${text}` + (linkUrl ? `, "linkUrl": ${linkUrl}` : "") + extra + "}";
 
 const appTargets = [{ platforms: TEXT_PLATFORMS }];
 
@@ -149,8 +149,42 @@ const RSS = trigger(1, "rss:TriggerNewArticle", 4, { url: "https://example.com/f
 const YOUTUBE = trigger(1, "youtube:watchVideosInAChannel", 1, { __IMTCONN__: null, channelId: "YOUR_CHANNEL_ID", limit: 1 });
 const WEBHOOK = trigger(1, "gateway:CustomWebHook", 1, { hook: null, maxResults: 1 });
 
+// The how-to's scenario (ampost.io/how-to/post-to-social-media-from-make): the webhook takes
+// {"text", "link", "id"}; link and id are optional. The platforms are set in the scenario.
+const HOW_TO_PLATFORMS = ["bluesky", "threads"];
+const HOW_TO_KEY = "webhook-{{ifempty(1.id; md5(1.text))}}";
+
 /** Each scenario: a file name, a title and the two flows. */
 export const SCENARIOS = [
+  {
+    file: "post-to-social-media",
+    title: "Post to social media from a webhook",
+    summary: "Gets a post by webhook (text, optional link), publishes it now and answers with the post ID and status.",
+    instant: true,
+    http: [
+      WEBHOOK,
+      toJson(2, "{{1.text}}"),
+      toJson(3, "{{ifempty(1.link; null)}}"),
+      httpCall(4, {
+        method: "post",
+        path: "/api/posts",
+        data: postBody({ text: "{{2.json}}", linkUrl: "{{3.json}}", extra: ', "publishNow": true', platforms: HOW_TO_PLATFORMS }),
+        idempotencyKey: HOW_TO_KEY,
+      }),
+      respond(5, '{"postId": "{{4.data.id}}", "status": "{{4.data.status}}"}'),
+    ],
+    app: [
+      WEBHOOK,
+      appModule(2, "createPost", {
+        targets: [{ platforms: HOW_TO_PLATFORMS }],
+        text: "{{1.text}}",
+        linkUrl: "{{ifempty(1.link; null)}}",
+        when: "now",
+        "Idempotency-Key": HOW_TO_KEY,
+      }),
+      respond(3, '{"postId": "{{2.id}}", "status": "{{2.status}}"}'),
+    ],
+  },
   {
     file: "rss-to-all-platforms",
     title: "RSS feed to all platforms",
