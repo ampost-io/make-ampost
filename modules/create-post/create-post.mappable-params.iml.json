@@ -164,6 +164,239 @@
 		"help": "**Next free queue slot** needs exactly one target and a queue set up for its platform set in Ampost."
 	},
 	{
+		"name": "youtube",
+		"type": "collection",
+		"label": "YouTube options",
+		"help": "Used when a target includes YouTube. **Made for kids** is required for YouTube.",
+		"spec": [
+			{
+				"name": "title",
+				"type": "text",
+				"label": "Title",
+				"validate": {
+					"max": 100
+				},
+				"help": "Up to 100 characters, no `<` or `>`. Default: the first line of the text."
+			},
+			{
+				"name": "privacyStatus",
+				"type": "select",
+				"label": "Privacy",
+				"options": [
+					{
+						"label": "Public",
+						"value": "public"
+					},
+					{
+						"label": "Unlisted",
+						"value": "unlisted"
+					},
+					{
+						"label": "Private",
+						"value": "private"
+					}
+				],
+				"help": "Default: public."
+			},
+			{
+				"name": "madeForKids",
+				"type": "boolean",
+				"label": "Made for kids",
+				"help": "YouTube's COPPA setting. Required for YouTube."
+			},
+			{
+				"name": "tags",
+				"type": "array",
+				"label": "Tags",
+				"spec": {
+					"type": "text",
+					"label": "Tag"
+				},
+				"help": "Together at most 500 characters."
+			},
+			{
+				"name": "playlistId",
+				"type": "text",
+				"label": "Playlist ID",
+				"help": "Adds the video to this playlist of the channel."
+			},
+			{
+				"name": "categoryId",
+				"type": "text",
+				"label": "Category ID",
+				"validate": {
+					"pattern": "^[0-9]+$"
+				},
+				"help": "For example `22` (People & Blogs, the default) or `28` (Science & Technology)."
+			},
+			{
+				"name": "notifySubscribers",
+				"type": "boolean",
+				"label": "Notify subscribers",
+				"help": "Default: yes."
+			},
+			{
+				"name": "containsSyntheticMedia",
+				"type": "boolean",
+				"label": "Contains synthetic media",
+				"help": "Realistic altered or AI-generated content."
+			}
+		]
+	},
+	{
+		"name": "tiktok",
+		"type": "collection",
+		"label": "TikTok options",
+		"help": "Used when a target includes TikTok. **Privacy** and **Consent** are required unless you send it as an inbox draft.",
+		"spec": [
+			{
+				"name": "privacyLevel",
+				"type": "select",
+				"label": "Privacy",
+				"options": [
+					{
+						"label": "Everyone",
+						"value": "PUBLIC_TO_EVERYONE"
+					},
+					{
+						"label": "Friends",
+						"value": "MUTUAL_FOLLOW_FRIENDS"
+					},
+					{
+						"label": "Followers",
+						"value": "FOLLOWER_OF_CREATOR"
+					},
+					{
+						"label": "Only me",
+						"value": "SELF_ONLY"
+					}
+				],
+				"help": "Pick one of the account's allowed levels (List accounts: Platform metadata)."
+			},
+			{
+				"name": "consent",
+				"type": "boolean",
+				"label": "Consent",
+				"help": "Yes only after the user agreed to TikTok's Music Usage Confirmation."
+			},
+			{
+				"name": "inboxDraft",
+				"type": "boolean",
+				"label": "Send as an inbox draft",
+				"help": "The creator finishes the post in the TikTok app."
+			}
+		]
+	},
+	{
+		"name": "pinterest",
+		"type": "collection",
+		"label": "Pinterest options",
+		"help": "Used when a target includes Pinterest.",
+		"spec": [
+			{
+				"name": "title",
+				"type": "text",
+				"label": "Pin title",
+				"validate": {
+					"max": 100
+				}
+			},
+			{
+				"name": "boardId",
+				"type": "text",
+				"label": "Board ID",
+				"validate": {
+					"pattern": "^[0-9]+$"
+				},
+				"help": "Default: the account's default board."
+			}
+		]
+	},
+	{
+		"name": "instagram",
+		"type": "collection",
+		"label": "Instagram options",
+		"help": "Used when a target includes Instagram.",
+		"spec": [
+			{
+				"name": "placement",
+				"type": "select",
+				"label": "Placement",
+				"options": [
+					{
+						"label": "Feed",
+						"value": "feed"
+					},
+					{
+						"label": "Story",
+						"value": "story"
+					},
+					{
+						"label": "Reel",
+						"value": "reel"
+					},
+					{
+						"label": "Carousel",
+						"value": "carousel"
+					}
+				],
+				"help": "Default: from the media (one image: feed, several: carousel, a video: reel)."
+			}
+		]
+	},
+	{
+		"name": "facebook",
+		"type": "collection",
+		"label": "Facebook options",
+		"help": "Used when a target includes Facebook.",
+		"spec": [
+			{
+				"name": "placement",
+				"type": "select",
+				"label": "Placement",
+				"options": [
+					{
+						"label": "Feed",
+						"value": "feed"
+					},
+					{
+						"label": "Story",
+						"value": "story"
+					},
+					{
+						"label": "Reel",
+						"value": "reel"
+					}
+				],
+				"help": "Default: feed."
+			}
+		]
+	},
+	{
+		"name": "linkedin",
+		"type": "collection",
+		"label": "LinkedIn options",
+		"help": "Used when a target includes LinkedIn.",
+		"spec": [
+			{
+				"name": "visibility",
+				"type": "select",
+				"label": "Visibility",
+				"options": [
+					{
+						"label": "Public",
+						"value": "PUBLIC"
+					},
+					{
+						"label": "Connections only",
+						"value": "CONNECTIONS"
+					}
+				],
+				"help": "Default: public."
+			}
+		]
+	},
+	{
 		"name": "firstComment",
 		"type": "text",
 		"label": "First comment",
@@ -211,9 +444,9 @@
 	{
 		"name": "options",
 		"type": "text",
-		"label": "Platform options (JSON)",
+		"label": "Other platform options (JSON)",
 		"advanced": true,
-		"help": "Per-platform settings as a JSON object, for example `{\"youtube\": {\"title\": \"My video\", \"privacy\": \"public\"}}`. The fields are listed at https://ampost.io/docs."
+		"help": "Options the fields above do not cover, as a JSON object keyed by platform, for example `{\"youtube\": {\"title\": \"My video\", \"privacyStatus\": \"public\"}, \"telegram\": {\"disableNotification\": true}}`. A platform's fields above replace its key here. The options are listed at https://ampost.io/docs."
 	},
 	{
 		"name": "metadata",

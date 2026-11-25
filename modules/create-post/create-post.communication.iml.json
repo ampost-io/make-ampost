@@ -5,14 +5,27 @@
 		"{{...}}": "{{pick(parameters, 'Idempotency-Key')}}"
 	},
 	"body": {
-		"{{...}}": "{{omit(parameters, 'when', 'scheduledFor', 'options', 'metadata', 'Idempotency-Key')}}",
-		"options": "{{if(parameters.options, parseJSON(ifempty(parameters.options, 'null')), undefined)}}",
+		"{{...}}": "{{omit(parameters, 'when', 'scheduledFor', 'options', 'youtube', 'tiktok', 'pinterest', 'instagram', 'facebook', 'linkedin', 'metadata', 'Idempotency-Key')}}",
+		"options": {
+			"{{...}}": "{{parseJSON(ifempty(parameters.options, '{}'))}}",
+			"youtube": "{{ifempty(parameters.youtube, get(parseJSON(ifempty(parameters.options, '{}')), 'youtube'))}}",
+			"tiktok": "{{ifempty(parameters.tiktok, get(parseJSON(ifempty(parameters.options, '{}')), 'tiktok'))}}",
+			"pinterest": "{{ifempty(parameters.pinterest, get(parseJSON(ifempty(parameters.options, '{}')), 'pinterest'))}}",
+			"instagram": "{{ifempty(parameters.instagram, get(parseJSON(ifempty(parameters.options, '{}')), 'instagram'))}}",
+			"facebook": "{{ifempty(parameters.facebook, get(parseJSON(ifempty(parameters.options, '{}')), 'facebook'))}}",
+			"linkedin": "{{ifempty(parameters.linkedin, get(parseJSON(ifempty(parameters.options, '{}')), 'linkedin'))}}"
+		},
 		"metadata": "{{if(parameters.metadata, toCollection(ifempty(parameters.metadata, emptyarray), 'key', 'value'), undefined)}}",
 		"scheduledFor": "{{if(parameters.when == 'schedule', parameters.scheduledFor, undefined)}}",
 		"publishNow": "{{if(parameters.when == 'now', true, undefined)}}",
 		"useQueue": "{{if(parameters.when == 'queue', true, undefined)}}"
 	},
 	"response": {
-		"output": "{{body}}"
+		"output": {
+			"{{...}}": "{{omit(body, 'scheduledFor', 'createdAt', 'updatedAt')}}",
+			"scheduledFor": "{{if(body.scheduledFor, parseDate(body.scheduledFor), body.scheduledFor)}}",
+			"createdAt": "{{if(body.createdAt, parseDate(body.createdAt), body.createdAt)}}",
+			"updatedAt": "{{if(body.updatedAt, parseDate(body.updatedAt), body.updatedAt)}}"
+		}
 	}
 }

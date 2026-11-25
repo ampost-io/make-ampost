@@ -207,18 +207,21 @@
 			},
 			{
 				"name": "nextAttemptAt",
-				"type": "date",
-				"label": "Next attempt at"
+				"type": "text",
+				"label": "Next attempt at",
+				"help": "ISO 8601 timestamp (UTC)."
 			},
 			{
 				"name": "createdAt",
-				"type": "date",
-				"label": "Created at"
+				"type": "text",
+				"label": "Created at",
+				"help": "ISO 8601 timestamp (UTC)."
 			},
 			{
 				"name": "updatedAt",
-				"type": "date",
-				"label": "Updated at"
+				"type": "text",
+				"label": "Updated at",
+				"help": "ISO 8601 timestamp (UTC)."
 			}
 		]
 	},

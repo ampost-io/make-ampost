@@ -6,9 +6,12 @@
 		"limit": 100
 	},
 	"response": {
-		"limit": "{{parameters.limit}}",
+		"limit": "{{ifempty(parameters.limit, 10)}}",
 		"iterate": "{{body.data}}",
-		"output": "{{item}}"
+		"output": {
+			"{{...}}": "{{omit(item, 'createdAt')}}",
+			"createdAt": "{{if(item.createdAt, parseDate(item.createdAt), item.createdAt)}}"
+		}
 	},
 	"pagination": {
 		"qs": {

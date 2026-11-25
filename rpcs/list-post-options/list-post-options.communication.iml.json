@@ -1,0 +1,21 @@
+{
+	"url": "/api/posts",
+	"method": "GET",
+	"qs": {
+		"limit": 100
+	},
+	"response": {
+		"limit": 300,
+		"iterate": "{{body.data}}",
+		"output": {
+			"label": "{{substring(ifempty(item.text, '(no text)'), 0, 60)}} ({{item.status}})",
+			"value": "{{item.id}}"
+		}
+	},
+	"pagination": {
+		"qs": {
+			"offset": "{{(pagination.page - 1) * 100}}"
+		},
+		"condition": "{{body.pagination.hasMore}}"
+	}
+}

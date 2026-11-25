@@ -7,5 +7,21 @@
 	"sizeBytes": 18234112,
 	"width": 1080,
 	"height": 1920,
-	"durationSeconds": 21.4
+	"durationSeconds": 21.4,
+	"id": "c0ffee00-1234-4abc-8def-0123456789ab",
+	"files": [
+		{
+			"url": "https://media.ampost.io/u/launch-a1b2c3.mp4",
+			"type": "video",
+			"mimeType": "video/mp4",
+			"sizeBytes": 18234112,
+			"width": 1080,
+			"height": 1920,
+			"durationSeconds": 21.4
+		}
+	],
+	"error": null,
+	"createdAt": "2026-11-20T09:00:00.000Z",
+	"expiresAt": "2026-11-20T10:00:00.000Z",
+	"completedAt": "2026-11-20T09:00:09.000Z"
 }

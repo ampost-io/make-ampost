@@ -83,7 +83,6 @@
 		"type": "uinteger",
 		"label": "Limit",
 		"default": 10,
-		"required": true,
-		"help": "Maximum number of results to work with during one execution cycle."
+		"help": "Maximum number of results to work with during one execution cycle. Default 10."
 	}
 ]

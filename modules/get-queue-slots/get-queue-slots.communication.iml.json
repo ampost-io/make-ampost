@@ -5,10 +5,11 @@
 		"{{...}}": "{{omit(parameters, 'platformSetId')}}"
 	},
 	"response": {
+		"limit": "{{ifempty(parameters.count, 10)}}",
 		"iterate": "{{body.slots}}",
 		"output": {
-			"scheduledFor": "{{item.scheduledFor}}",
-			"postId": "{{item.postId}}",
+			"{{...}}": "{{omit(item, 'scheduledFor')}}",
+			"scheduledFor": "{{if(item.scheduledFor, parseDate(item.scheduledFor), item.scheduledFor)}}",
 			"free": "{{!item.postId}}",
 			"platformSetId": "{{body.platformSetId}}",
 			"timezone": "{{body.timezone}}"

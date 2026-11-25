@@ -67,6 +67,15 @@ const FUNCTIONS = {
   upper: (text) => String(text ?? "").toUpperCase(),
   trim: (text) => String(text ?? "").trim(),
   join: (array, separator) => (Array.isArray(array) ? array.join(separator) : ""),
+  // Make returns a date object; the tests compare its ISO form, which is what Make shows in JSON.
+  parseDate: (text) => {
+    if (isEmpty(text)) return undefined;
+    const date = new Date(text);
+    if (Number.isNaN(date.getTime())) throw new Error(`parseDate: not a date: ${text}`);
+    return date.toISOString();
+  },
+  substring: (text, start, end) => String(text ?? "").substring(start, end),
+  keys: (object) => (object == null || typeof object !== "object" ? [] : Object.keys(object)),
 };
 
 // ---------- tokenizer ----------

@@ -1,16 +1,23 @@
 [
 	{
+		"label": "Triggers",
+		"modules": [
+			"watchPostEvents",
+			"watchAccountEvents"
+		]
+	},
+	{
 		"label": "Posts",
 		"modules": [
+			"listPosts",
+			"getPost",
 			"createPost",
 			"validatePost",
-			"getPost",
-			"listPosts",
 			"publishPost",
 			"retryPost",
-			"deletePost",
+			"editPublishedPost",
 			"unpublishPost",
-			"editPublishedPost"
+			"deletePost"
 		]
 	},
 	{
@@ -33,13 +40,6 @@
 			"listPostAnalytics",
 			"getAnalyticsOverview",
 			"listFollowers"
-		]
-	},
-	{
-		"label": "Triggers",
-		"modules": [
-			"watchPostEvents",
-			"watchAccountEvents"
 		]
 	},
 	{

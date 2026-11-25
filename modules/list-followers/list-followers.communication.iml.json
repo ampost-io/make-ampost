@@ -6,9 +6,12 @@
 		"limit": 100
 	},
 	"response": {
-		"limit": "{{parameters.limit}}",
+		"limit": "{{ifempty(parameters.limit, 10)}}",
 		"iterate": "{{body.data}}",
-		"output": "{{item}}"
+		"output": {
+			"{{...}}": "{{omit(item, 'syncedAt')}}",
+			"syncedAt": "{{if(item.syncedAt, parseDate(item.syncedAt), item.syncedAt)}}"
+		}
 	},
 	"pagination": {
 		"qs": {

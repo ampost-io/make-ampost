@@ -56,8 +56,9 @@
 			},
 			{
 				"name": "syncedAt",
-				"type": "date",
-				"label": "Synced at"
+				"type": "text",
+				"label": "Synced at",
+				"help": "ISO 8601 timestamp (UTC)."
 			}
 		]
 	}

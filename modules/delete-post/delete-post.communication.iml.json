@@ -2,6 +2,11 @@
 	"url": "/api/posts/{{encodeURL(parameters.postId)}}",
 	"method": "DELETE",
 	"response": {
-		"output": "{{body}}"
+		"output": {
+			"{{...}}": "{{omit(body, 'scheduledFor', 'createdAt', 'updatedAt')}}",
+			"scheduledFor": "{{if(body.scheduledFor, parseDate(body.scheduledFor), body.scheduledFor)}}",
+			"createdAt": "{{if(body.createdAt, parseDate(body.createdAt), body.createdAt)}}",
+			"updatedAt": "{{if(body.updatedAt, parseDate(body.updatedAt), body.updatedAt)}}"
+		}
 	}
 }

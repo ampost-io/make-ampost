@@ -4,7 +4,7 @@
 		"type": "text",
 		"label": "URL",
 		"required": true,
-		"help": "Enter a path relative to `https://api.ampost.io`. For example: `/api/posts`. The endpoints are in the API reference at https://ampost.io/docs."
+		"help": "Enter a path relative to `https://api.ampost.io/api`. For example: `/posts`. The endpoints are in the API reference at https://ampost.io/docs."
 	},
 	{
 		"name": "method",

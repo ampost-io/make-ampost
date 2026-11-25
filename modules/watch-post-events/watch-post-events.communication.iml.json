@@ -3,11 +3,22 @@
 	"method": "GET",
 	"response": {
 		"output": {
+			"{{...}}": "{{omit(payload.data, 'post', 'platformPost')}}",
 			"eventId": "{{payload.id}}",
 			"type": "{{payload.type}}",
-			"createdAt": "{{payload.createdAt}}",
-			"post": "{{body}}",
-			"platformPost": "{{payload.data.platformPost}}"
+			"createdAt": "{{if(payload.createdAt, parseDate(payload.createdAt), payload.createdAt)}}",
+			"post": {
+				"{{...}}": "{{omit(body, 'scheduledFor', 'createdAt', 'updatedAt')}}",
+				"scheduledFor": "{{if(body.scheduledFor, parseDate(body.scheduledFor), body.scheduledFor)}}",
+				"createdAt": "{{if(body.createdAt, parseDate(body.createdAt), body.createdAt)}}",
+				"updatedAt": "{{if(body.updatedAt, parseDate(body.updatedAt), body.updatedAt)}}"
+			},
+			"platformPost": {
+				"{{...}}": "{{omit(payload.data.platformPost, 'nextAttemptAt', 'createdAt', 'updatedAt')}}",
+				"nextAttemptAt": "{{if(payload.data.platformPost.nextAttemptAt, parseDate(payload.data.platformPost.nextAttemptAt), payload.data.platformPost.nextAttemptAt)}}",
+				"createdAt": "{{if(payload.data.platformPost.createdAt, parseDate(payload.data.platformPost.createdAt), payload.data.platformPost.createdAt)}}",
+				"updatedAt": "{{if(payload.data.platformPost.updatedAt, parseDate(payload.data.platformPost.updatedAt), payload.data.platformPost.updatedAt)}}"
+			}
 		}
 	}
 }

@@ -1,5 +1,5 @@
 {
-	"url": "https://api.ampost.io/{{parameters.url}}",
+	"url": "https://api.ampost.io/api/{{parameters.url}}",
 	"method": "{{parameters.method}}",
 	"qs": {
 		"{{...}}": "{{toCollection(parameters.qs, 'key', 'value')}}"

@@ -33,8 +33,8 @@
 		"method": "GET",
 		"repeat": {
 			"condition": "{{temp.status == 'pending'}}",
-			"delay": 2000,
-			"limit": 12
+			"delay": 3000,
+			"limit": 13
 		},
 		"response": {
 			"temp": {
@@ -45,8 +45,11 @@
 				"message": "The upload {{body.status}}: {{ifempty(body.error, 'no detail')}}"
 			},
 			"output": {
+				"{{...}}": "{{omit(body, 'createdAt', 'expiresAt', 'completedAt')}}",
+				"createdAt": "{{if(body.createdAt, parseDate(body.createdAt), body.createdAt)}}",
+				"expiresAt": "{{if(body.expiresAt, parseDate(body.expiresAt), body.expiresAt)}}",
+				"completedAt": "{{if(body.completedAt, parseDate(body.completedAt), body.completedAt)}}",
 				"uploadId": "{{body.id}}",
-				"status": "{{body.status}}",
 				"url": "{{body.files[1].url}}",
 				"type": "{{body.files[1].type}}",
 				"mimeType": "{{body.files[1].mimeType}}",

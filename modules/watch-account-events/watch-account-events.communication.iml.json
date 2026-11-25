@@ -3,10 +3,17 @@
 	"method": "GET",
 	"response": {
 		"output": {
+			"{{...}}": "{{omit(payload.data, 'account')}}",
 			"eventId": "{{payload.id}}",
 			"type": "{{payload.type}}",
-			"createdAt": "{{payload.createdAt}}",
-			"account": "{{body}}"
+			"createdAt": "{{if(payload.createdAt, parseDate(payload.createdAt), payload.createdAt)}}",
+			"account": {
+				"{{...}}": "{{omit(body, 'tokenExpiresAt', 'createdAt', 'updatedAt', 'lastUsedAt')}}",
+				"tokenExpiresAt": "{{if(body.tokenExpiresAt, parseDate(body.tokenExpiresAt), body.tokenExpiresAt)}}",
+				"createdAt": "{{if(body.createdAt, parseDate(body.createdAt), body.createdAt)}}",
+				"updatedAt": "{{if(body.updatedAt, parseDate(body.updatedAt), body.updatedAt)}}",
+				"lastUsedAt": "{{if(body.lastUsedAt, parseDate(body.lastUsedAt), body.lastUsedAt)}}"
+			}
 		}
 	}
 }

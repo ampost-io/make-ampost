@@ -181,16 +181,33 @@ describe("post modules", () => {
     assert.equal("idempotency-key" in now.calls[0].headers, false);
 
     const queue = await run("createPost", { targets: [{ platforms: ["bluesky"] }], text: "Queued", when: "queue" });
-    assert.deepEqual(queue.calls[0].body, { targets: [{ platforms: ["bluesky"] }], text: "Queued", useQueue: true });
+    assert.deepEqual(queue.calls[0].body, { targets: [{ platforms: ["bluesky"] }], text: "Queued", options: {}, useQueue: true });
 
     const draft = await run("createPost", { targets: [{ platforms: ["bluesky"] }], text: "Draft", when: "draft", scheduledFor: "2026-11-24T15:00:00.000Z" });
-    assert.deepEqual(draft.calls[0].body, { targets: [{ platforms: ["bluesky"] }], text: "Draft" });
+    assert.deepEqual(draft.calls[0].body, { targets: [{ platforms: ["bluesky"] }], text: "Draft", options: {} });
+  });
+
+  it("Create a post: platform option fields, merged with the JSON fallback; a field set replaces that platform's JSON", async () => {
+    const { calls } = await run("createPost", {
+      targets: [{ platforms: ["youtube", "tiktok", "telegram"] }],
+      text: "Video",
+      when: "draft",
+      youtube: { title: "My video", privacyStatus: "unlisted", madeForKids: false, tags: ["make", "ampost"] },
+      tiktok: { privacyLevel: "SELF_ONLY", consent: true },
+      options: '{"youtube": {"title": "ignored"}, "telegram": {"disableNotification": true}}',
+    });
+    assert.deepEqual(calls[0].body.options, {
+      youtube: { title: "My video", privacyStatus: "unlisted", madeForKids: false, tags: ["make", "ampost"] },
+      tiktok: { privacyLevel: "SELF_ONLY", consent: true },
+      telegram: { disableNotification: true },
+    });
+    for (const name of ["youtube", "tiktok", "pinterest", "instagram", "facebook", "linkedin"]) assert.equal(name in calls[0].body, false);
   });
 
   it("Validate a post sends the same body to /api/posts/validate", async () => {
     const { bundles, calls } = await run("validatePost", { ...fields, when: "now" });
     assert.equal(calls[0].url, "https://api.ampost.io/api/posts/validate");
-    assert.deepEqual(calls[0].body, { ...fields, publishNow: true });
+    assert.deepEqual(calls[0].body, { ...fields, options: {}, publishNow: true });
     assert.deepEqual(bundles, [sample("validatePost")]);
     assertInterfaceCovers("validatePost", bundles[0]);
   });
@@ -390,11 +407,67 @@ describe("account, queue and analytics modules", () => {
   });
 });
 
+describe("review rules (Make #2380383)", () => {
+  it("Limit is optional and defaults to 10", async () => {
+    const many = Array.from({ length: 100 }, () => sample("listPosts"));
+    for (const id of ["listPosts", "listAccounts", "listPlatformSets", "listPostAnalytics", "listFollowers"]) {
+      const limit = component("module", id).mappableParams.find((p) => p.name === "limit");
+      assert.equal(limit.required, undefined, id);
+      assert.equal(limit.default, 10, id);
+    }
+    const { bundles } = await run("listPosts", {}, { posts_list: (req) => page(many, Number(req.qs.offset ?? 0), true, 300) });
+    assert.equal(bundles.length, 10);
+  });
+
+  it("List queue slots stops at Count", async () => {
+    const slots = Array.from({ length: 8 }, (_, i) => ({ scheduledFor: `2026-11-2${i}T09:00:00.000Z`, postId: null }));
+    const { bundles } = await run("getQueueSlots", { platformSetId: SET_ID, count: 3 }, {
+      queue_slots: () => ({ platformSetId: SET_ID, timezone: "Europe/Warsaw", slots }),
+    });
+    assert.equal(bundles.length, 3);
+  });
+
+  it("dates inside arrays are typed text (parsing them needs custom IML functions)", () => {
+    const walk = (fields, inArray, path) => {
+      for (const f of fields ?? []) {
+        if (inArray) assert.notEqual(f.type, "date", `${path}.${f.name}`);
+        if (f.type === "collection") walk(f.spec, inArray, `${path}.${f.name}`);
+        if (f.type === "array") walk(Array.isArray(f.spec) ? f.spec : f.spec?.spec, true, `${path}.${f.name}[]`);
+      }
+    };
+    for (const id of Object.keys(manifest.components.module)) walk(component("module", id).interface, false, id);
+  });
+
+  it("every post ID field is the post picker", () => {
+    for (const id of ["getPost", "publishPost", "retryPost", "deletePost", "unpublishPost", "editPublishedPost", "listPostAnalytics"]) {
+      const field = component("module", id).mappableParams.find((p) => p.name === "postId");
+      assert.equal(field.type, "select", id);
+      assert.equal(field.options, "rpc://listPostOptions", id);
+      assert.equal(field.mode, "edit", id);
+    }
+  });
+
+  it("the post picker shows the start of the text and the status, and lists at most 300", async () => {
+    const long = { ...sample("listPosts"), text: "x".repeat(200), status: "draft" };
+    const empty = { ...sample("listPosts"), text: "", status: "failed" };
+    const api = fakeApi({ posts_list: () => page([long, empty]) });
+    const rpc = component("rpc", "listPostOptions").communication;
+    const { bundles } = await runCommunication(rpc, { connection, transport: api.transport });
+    assert.deepEqual(bundles, [
+      { label: `${"x".repeat(60)} (draft)`, value: POST_ID },
+      { label: "(no text) (failed)", value: POST_ID },
+    ]);
+    for (const id of ["listPostOptions", "listAccountOptions", "listPlatformSetOptions"]) {
+      assert.equal(component("rpc", id).communication.response.limit, 300, id);
+    }
+  });
+});
+
 describe("Make an API call", () => {
   const call = (parameters) => run("makeApiCall", parameters);
 
   it("calls a relative path on api.ampost.io with the connection's key", async () => {
-    const { bundles, calls } = await call({ url: "/api/platform-sets", method: "GET", qs: [{ key: "limit", value: "10" }] });
+    const { bundles, calls } = await call({ url: "/platform-sets", method: "GET", qs: [{ key: "limit", value: "10" }] });
     assert.equal(calls[0].url, "https://api.ampost.io/api/platform-sets");
     assert.deepEqual(calls[0].qs, { limit: "10" });
     assert.equal(calls[0].headers.authorization, `Bearer ${API_KEY}`);
@@ -404,7 +477,7 @@ describe("Make an API call", () => {
 
   it("sends a JSON text body and keeps the key when headers are added", async () => {
     const body = JSON.stringify({ targets: [{ platforms: ["bluesky"] }], text: "Hi" });
-    const { calls } = await call({ url: "/api/posts", method: "POST", body, headers: [{ key: "Content-Type", value: "application/json" }] });
+    const { calls } = await call({ url: "/posts", method: "POST", body, headers: [{ key: "Content-Type", value: "application/json" }] });
     assert.equal(calls[0].body, body);
     assert.equal(calls[0].headers["content-type"], "application/json");
     assert.equal(calls[0].headers.authorization, `Bearer ${API_KEY}`);
@@ -518,8 +591,11 @@ describe("webhooks and instant triggers", () => {
       transport: api.transport,
     });
     assert.equal(api.calls[0].url, `https://api.ampost.io/api/posts/${POST_ID}`);
-    assert.deepEqual(bundles, [sample("watchPostEvents")]);
-    assertInterfaceCovers("watchPostEvents", bundles[0], ["platformPost"]);
+    // No platform post on post.* events: the collection comes out empty.
+    const { platformPost, ...rest } = bundles[0];
+    assert.deepEqual(platformPost, {});
+    assert.deepEqual(rest, sample("watchPostEvents"));
+    assertInterfaceCovers("watchPostEvents", bundles[0]);
   });
 
   it("Watch post events passes on the platform post of post.platform.* events", async () => {

@@ -162,13 +162,15 @@
 			},
 			{
 				"name": "syncedAt",
-				"type": "date",
-				"label": "Synced at"
+				"type": "text",
+				"label": "Synced at",
+				"help": "ISO 8601 timestamp (UTC)."
 			},
 			{
 				"name": "nextSyncAt",
-				"type": "date",
-				"label": "Next sync at"
+				"type": "text",
+				"label": "Next sync at",
+				"help": "ISO 8601 timestamp (UTC)."
 			}
 		]
 	},

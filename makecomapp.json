@@ -372,6 +372,15 @@
 					"communication": "rpcs/list-account-options/list-account-options.communication.iml.json",
 					"params": "rpcs/list-account-options/list-account-options.params.iml.json"
 				}
+			},
+			"listPostOptions": {
+				"label": "List posts",
+				"connection": "ampost",
+				"altConnection": null,
+				"codeFiles": {
+					"communication": "rpcs/list-post-options/list-post-options.communication.iml.json",
+					"params": "rpcs/list-post-options/list-post-options.params.iml.json"
+				}
 			}
 		},
 		"function": {},

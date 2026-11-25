@@ -26,7 +26,7 @@ export const moduleIds = () => Object.keys(manifest.components.module);
 /** Joins a request URL onto Base's baseUrl, like Make does for relative URLs. */
 function resolveUrl(url) {
   // Make removes the extra slash between a fixed prefix ending in "/" and a path starting with "/".
-  if (/^https?:\/\//.test(url)) return url.replace(/^(https?:\/\/[^/]+)\/\/+/, "$1/");
+  if (/^https?:\/\//.test(url)) return url.replace(/^(https?:\/\/[^/]+(?:\/[^/]+)*?)\/\/+/, "$1/");
   return base.baseUrl.replace(/\/$/, "") + "/" + url.replace(/^\//, "");
 }
 

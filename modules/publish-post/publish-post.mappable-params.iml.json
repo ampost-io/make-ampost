@@ -1,10 +1,12 @@
 [
 	{
 		"name": "postId",
-		"type": "text",
+		"type": "select",
 		"label": "Post ID",
+		"options": "rpc://listPostOptions",
+		"mode": "edit",
 		"required": true,
-		"help": "The `id` of an Ampost post, for example from **Create a post** or **Search posts**."
+		"help": "Pick a post (the newest 300 are listed: the start of its text and its status), or map an `id` from **Create a post**, **Search posts** or **Watch post events**."
 	},
 	{
 		"name": "Idempotency-Key",

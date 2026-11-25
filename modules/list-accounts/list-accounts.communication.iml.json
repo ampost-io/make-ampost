@@ -6,9 +6,15 @@
 		"limit": 100
 	},
 	"response": {
-		"limit": "{{parameters.limit}}",
+		"limit": "{{ifempty(parameters.limit, 10)}}",
 		"iterate": "{{body.data}}",
-		"output": "{{item}}"
+		"output": {
+			"{{...}}": "{{omit(item, 'tokenExpiresAt', 'createdAt', 'updatedAt', 'lastUsedAt')}}",
+			"tokenExpiresAt": "{{if(item.tokenExpiresAt, parseDate(item.tokenExpiresAt), item.tokenExpiresAt)}}",
+			"createdAt": "{{if(item.createdAt, parseDate(item.createdAt), item.createdAt)}}",
+			"updatedAt": "{{if(item.updatedAt, parseDate(item.updatedAt), item.updatedAt)}}",
+			"lastUsedAt": "{{if(item.lastUsedAt, parseDate(item.lastUsedAt), item.lastUsedAt)}}"
+		}
 	},
 	"pagination": {
 		"qs": {

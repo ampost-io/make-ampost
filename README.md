@@ -17,30 +17,35 @@ Step-by-step guide: [Post to social media from Make](https://ampost.io/how-to/po
 
 | Group | Module | Type | API |
 | ----- | ------ | ---- | --- |
-| Posts | Create a post | action | `POST /api/posts`: draft, publish now, schedule or add to the queue |
-| | Validate a post | action | `POST /api/posts/validate`: each platform's verdict, nothing is created |
+| Triggers | Watch post events | instant | a webhook for `post.*` events; the post is re-read with your key |
+| | Watch account events | instant | a webhook for `account.*` events |
+| Posts | Search posts | search | `GET /api/posts`, paged |
 | | Get a post | action | `GET /api/posts/{id}` |
-| | Search posts | search | `GET /api/posts`, paged |
+| | Create a post | action | `POST /api/posts`: draft, publish now, schedule or add to the queue |
+| | Validate a post | action | `POST /api/posts/validate`: each platform's verdict, nothing is created |
 | | Publish a post now | action | `POST /api/posts/{id}/publish` |
 | | Retry a failed post | action | `POST /api/posts/{id}/retry` |
-| | Delete a post | action | `DELETE /api/posts/{id}` |
-| | Unpublish a post | action | `POST /api/posts/{id}/unpublish`: deletes a published post from the platforms (Instagram and TikTok keep it, with a notice) |
 | | Edit a published post | action | `POST /api/posts/{id}/edit-published`: replaces the text (Instagram, Threads, TikTok, Bluesky and X keep theirs, with a notice) |
-| Media | Upload a media file | action | `POST /api/media/uploads`, then the file goes straight to storage; returns the URL for Create a post |
+| | Unpublish a post | action | `POST /api/posts/{id}/unpublish`: deletes a published post from the platforms (Instagram and TikTok keep it, with a notice) |
+| | Delete a post | action | `DELETE /api/posts/{id}` |
+| Media | Upload a media file | action | `POST /api/media/uploads`, then the file goes straight to storage; returns the upload and the URL for Create a post |
 | Accounts | List accounts | search | `GET /api/accounts` |
 | | List platform sets | search | `GET /api/platform-sets` |
 | | List queue slots | search | `GET /api/platform-sets/{id}/queue/slots` |
 | Analytics | List post analytics | search | `GET /api/analytics/posts` |
 | | Get an analytics overview | action | `GET /api/analytics/overview` |
 | | List follower counts | search | `GET /api/analytics/followers` |
-| Triggers | Watch post events | instant | a webhook for `post.*` events; the post is re-read with your key |
-| | Watch account events | instant | a webhook for `account.*` events |
-| Other | Make an API call | universal | any endpoint, with the connection's key |
+| Other | Make an API call | universal | any endpoint under `https://api.ampost.io/api`, with the connection's key |
 
 - **Connection:** an Ampost API key. Make checks it with one docs search call. Create the key in
   [Settings, API keys](https://ampost.io/app/settings/api-keys?ref=github). The two triggers need a key
   that can write webhooks.
-- **Pickers:** the Platform set and Account fields list your sets and accounts.
+- **Pickers:** the Platform set, Account and Post ID fields list your sets, accounts and newest 300
+  posts; each also takes a mapped ID.
+- **Platform options:** Create a post and Validate a post have fields for YouTube, TikTok,
+  Pinterest, Instagram, Facebook and LinkedIn options, and an advanced JSON field for the rest.
+- **Dates** come out as Make dates. Dates inside arrays (a post's platform posts, analytics history)
+  stay ISO 8601 text.
 - **Safe retries:** Create a post and Publish a post now take an optional Idempotency key. Map
   something unique per item, such as a sheet row or a feed item's URL. If Make runs the module
   again, it returns the first result instead of posting twice.
@@ -147,6 +152,11 @@ Things that are easy to get wrong when you edit the app:
   when `x` is empty; write `parseJSON(ifempty(x, 'null'))`.
 - A module's headers override Base's per header name. The connection's communication does not
   inherit Base at all.
+- Make has no custom IML functions for this app (they need Make's approval), so a date inside an
+  array can't be parsed: type it `text` in the interface. Wrap top-level dates as
+  `if(x, parseDate(x), x)` so a null stays null.
+- An empty `options.<platform>` for a platform the post doesn't target fails validation, so a
+  platform's option fields must produce no key when they are empty.
 - Scenario blueprints separate function arguments with `;` (`{{ifempty(1.text; null)}}`); the app's
   IML uses `,`.
 

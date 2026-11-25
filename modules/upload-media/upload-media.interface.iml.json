@@ -43,5 +43,75 @@
 		"name": "status",
 		"type": "text",
 		"label": "Status"
+	},
+	{
+		"name": "id",
+		"type": "text",
+		"label": "ID"
+	},
+	{
+		"name": "files",
+		"type": "array",
+		"label": "Files",
+		"spec": {
+			"type": "collection",
+			"spec": [
+				{
+					"name": "url",
+					"type": "url",
+					"label": "URL"
+				},
+				{
+					"name": "type",
+					"type": "text",
+					"label": "Type"
+				},
+				{
+					"name": "mimeType",
+					"type": "text",
+					"label": "MIME type"
+				},
+				{
+					"name": "sizeBytes",
+					"type": "uinteger",
+					"label": "Size (bytes)"
+				},
+				{
+					"name": "width",
+					"type": "uinteger",
+					"label": "Width"
+				},
+				{
+					"name": "height",
+					"type": "uinteger",
+					"label": "Height"
+				},
+				{
+					"name": "durationSeconds",
+					"type": "number",
+					"label": "Duration (seconds)"
+				}
+			]
+		}
+	},
+	{
+		"name": "error",
+		"type": "text",
+		"label": "Error"
+	},
+	{
+		"name": "createdAt",
+		"type": "date",
+		"label": "Created at"
+	},
+	{
+		"name": "expiresAt",
+		"type": "date",
+		"label": "Expires at"
+	},
+	{
+		"name": "completedAt",
+		"type": "date",
+		"label": "Completed at"
 	}
 ]

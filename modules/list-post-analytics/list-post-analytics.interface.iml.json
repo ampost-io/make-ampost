@@ -25,6 +25,23 @@
 		"label": "Platform posts",
 		"spec": [
 			{
+				"name": "notice",
+				"type": "collection",
+				"label": "Notice",
+				"spec": [
+					{
+						"name": "code",
+						"type": "text",
+						"label": "Code"
+					},
+					{
+						"name": "message",
+						"type": "text",
+						"label": "Message"
+					}
+				]
+			},
+			{
 				"name": "platform",
 				"type": "text",
 				"label": "Platform"
@@ -51,8 +68,9 @@
 			},
 			{
 				"name": "publishedAt",
-				"type": "date",
-				"label": "Published at"
+				"type": "text",
+				"label": "Published at",
+				"help": "ISO 8601 timestamp (UTC)."
 			},
 			{
 				"name": "contentType",
@@ -108,8 +126,9 @@
 			},
 			{
 				"name": "syncedAt",
-				"type": "date",
-				"label": "Synced at"
+				"type": "text",
+				"label": "Synced at",
+				"help": "ISO 8601 timestamp (UTC)."
 			}
 		]
 	}
