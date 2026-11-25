@@ -57,7 +57,7 @@ const PROBES = {
   listPostAnalytics: { limit: 1 },
   getAnalyticsOverview: { from: "2026-11-01", to: "2026-11-02" },
   listFollowers: { limit: 1 },
-  makeApiCall: { url: "/api/accounts", method: "GET" },
+  makeApiCall: { url: "/accounts", method: "GET" },
 };
 
 async function probe(spec, options) {
