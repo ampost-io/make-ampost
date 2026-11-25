@@ -67,6 +67,18 @@ server.
 To change the app later, edit the files and deploy again. To bring changes made in Make's web
 editor back into these files, use **Download from Make** on `makecomapp.json`.
 
+Without VS Code, `scripts/deploy.mjs` uploads the same files through Make's API (Node 18+). The token
+needs the `sdk-apps:read` and `sdk-apps:write` scopes. The first run creates the app and prints its
+name; later runs update it:
+
+```sh
+MAKE_API_TOKEN=... node scripts/deploy.mjs
+MAKE_API_TOKEN=... MAKE_APP=ampost-xxxx node scripts/deploy.mjs
+```
+
+The app icon is `assets/icon.png` (rendered from `assets/icon.svg`): Make shows its black areas
+white on the app's theme color.
+
 ## Templates
 
 | Scenario | File | What it does |
