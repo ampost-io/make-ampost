@@ -4511,7 +4511,7 @@
       "post": {
         "operationId": "media_upload_create",
         "summary": "Start a media upload",
-        "description": "Get a way to upload a local file for a post. Media in posts_create must be a public URL; use this when the user has the file on their device or you have the file itself. Returns `uploadPageUrl`, an Ampost page where the user uploads files in a browser (in MCP, a client that supports URL elicitation asks the user to open it itself and leaves `uploadPageUrl` out), and `uploadUrl` + `method` + `headers` to PUT one file directly. Both stop accepting files after 60 minutes. Then poll media_upload_status; when it is completed, its `files` are `media[]` items for posts_create. Files that no post uses are deleted 24 hours after the upload was created (by the daily cleanup).\n\nMCP tool: `media_upload_create`. Key scope: `media:write`.",
+        "description": "Get a way to upload a local file for a post. Media in posts_create must be a public URL; use this when the user has the file on their device or you have the file itself. Returns `uploadPageUrl`, an Ampost page where the user uploads files in a browser (in MCP, a client that supports URL elicitation asks the user to open it itself and leaves `uploadPageUrl` out), and `uploadUrl` + `method` + `headers` to PUT one file directly. Both stop accepting files after 60 minutes. Then poll media_upload_status; when it is completed, its `files` are `media[]` items for posts_create. Files that no post uses are deleted 24 hours after the upload was created (by the hourly cleanup). At most 20 upload links accept files at once (`RATE_LIMITED` with `Retry-After` past that), and each of them holds 200 MB of the plan's media storage while it accepts files (`QUOTA_EXCEEDED` with `details.quota` `storedMediaBytes` when that does not fit).\n\nMCP tool: `media_upload_create`. Key scope: `media:write`.",
         "tags": [
           "media"
         ],
@@ -4598,8 +4598,7 @@
                     "authorization": "Bearer vercel_blob_client_...",
                     "x-api-version": "12",
                     "x-vercel-blob-access": "public",
-                    "x-add-random-suffix": "0",
-                    "x-allow-overwrite": "1"
+                    "x-add-random-suffix": "0"
                   },
                   "limits": {
                     "maxFiles": 35,
