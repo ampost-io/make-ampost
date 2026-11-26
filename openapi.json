@@ -7096,7 +7096,7 @@
             }
           },
           "403": {
-            "description": "`INSUFFICIENT_SCOPE`, `PLATFORM_SET_NOT_ALLOWED`, `UPGRADE_REQUIRED`, `PLATFORM_COMING_SOON`, `ACCOUNT_LIMIT_REACHED`, `ACCOUNT_SUSPENDED`. Each code is described under Errors in the docs.",
+            "description": "`INSUFFICIENT_SCOPE`, `PLATFORM_SET_NOT_ALLOWED`, `UPGRADE_REQUIRED`, `PLATFORM_COMING_SOON`, `ACCOUNT_LIMIT_REACHED`, `CONNECT_LINKS_BLOCKED`, `ACCOUNT_SUSPENDED`. Each code is described under Errors in the docs.",
             "headers": {
               "X-Request-Id": {
                 "description": "Id of this request. A valid incoming `X-Request-Id` (8-128 of `A-Z a-z 0-9 . _ : -`) is echoed, otherwise one is generated. Quote it when you contact support.",
