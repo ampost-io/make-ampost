@@ -4,6 +4,6 @@
 		"type": "password",
 		"label": "API key",
 		"required": true,
-		"help": "Create a key in Ampost under Settings, API keys (https://ampost.io/app/settings/api-keys). It starts with `amp_`. The **Watch** triggers need a key with the `webhooks:write` scope that is not restricted to some platform sets."
+		"help": "Create a key in Ampost under Setup → API keys (https://ampost.io/app/settings/api-keys). It starts with `amp_`. The **Watch** triggers need a key with the `webhooks:write` scope that is not restricted to some platform sets."
 	}
 ]

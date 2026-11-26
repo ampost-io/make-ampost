@@ -38,7 +38,7 @@ Step-by-step guide: [Post to social media from Make](https://ampost.io/how-to/po
 | Other | Make an API call | universal | any endpoint under `https://api.ampost.io/api`, with the connection's key |
 
 - **Connection:** an Ampost API key. Make checks it with one docs search call. Create the key in
-  [Settings, API keys](https://ampost.io/app/settings/api-keys?ref=github). The two triggers need a key
+  [Setup → API keys](https://ampost.io/app/settings/api-keys?ref=github). The two triggers need a key
   that can write webhooks.
 - **Pickers:** the Platform set, Account and Post ID fields list your sets, accounts and newest 300
   posts; each also takes a mapped ID.

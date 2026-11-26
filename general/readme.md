@@ -3,7 +3,7 @@
 Publish and schedule posts on Instagram, Facebook, LinkedIn, TikTok, Threads, X, YouTube, Pinterest,
 Bluesky, Telegram and Discord with one module.
 
-1. Create an API key in Ampost under Settings, API keys: https://ampost.io/app/settings/api-keys?ref=make
+1. Create an API key in Ampost under Setup → API keys: https://ampost.io/app/settings/api-keys?ref=make
 2. Add an Ampost connection in Make and paste the key.
 3. Use **Create a post** to publish, schedule or queue a post, or **Validate a post** to check it first.
 
