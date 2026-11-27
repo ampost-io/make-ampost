@@ -19614,14 +19614,15 @@
                 "type": "string",
                 "enum": [
                   "failing",
-                  "key_revoked"
+                  "key_revoked",
+                  "member_left"
                 ]
               },
               {
                 "type": "null"
               }
             ],
-            "description": "`failing`: turned off by Ampost after deliveries kept failing. Fix the receiver, then set `enabled` to true. `key_revoked`: turned off because the API key or app that created it (or last changed its URL or secret) was revoked, or the app lost `webhooks:write`. Only the account owner can turn it back on, in the Ampost dashboard; the API refuses with `WEBHOOK_KEY_REVOKED`."
+            "description": "`failing`: turned off by Ampost after deliveries kept failing. Fix the receiver, then set `enabled` to true. `key_revoked`: turned off because the API key or app that created it (or last changed its URL or secret) was revoked, or the app lost `webhooks:write`. Only the account owner can turn it back on, in the Ampost dashboard; the API refuses with `WEBHOOK_KEY_REVOKED`. `member_left`: turned off because the person who added it (or last changed its URL) left the account; check the URL before setting `enabled` to true."
           },
           "disabledAt": {
             "anyOf": [
